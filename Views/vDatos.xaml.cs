@@ -32,6 +32,6 @@ public partial class vDatos : ContentPage
         }
 
         model = await UsuarioUpdate.GuardarUsuario(model, firestore);
-        MensajeLabel.Text = model.Mensaje;
+        MensajeLabel.Text = model.Mensaje; 
     }
 }
