@@ -1,0 +1,29 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ParkIsrael_Octavo.Views.vDatos"
+             Title="Registro Firestore">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Formulario Firestore"
+                   FontSize="26"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold" />
+
+            <Entry x:Name="NombreEntry" Placeholder="Nombre" Keyboard="Text" />
+            <Entry x:Name="CorreoEntry" Placeholder="Correo" Keyboard="Email" />
+            <Entry x:Name="SalarioEntry" Placeholder="Salario" Keyboard="Numeric" />
+
+            <Button Text="Guardar"
+                    BackgroundColor="Purple"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Clicked="OnGuardarClicked" />
+
+            <Label x:Name="MensajeLabel"
+                   TextColor="Green"
+                   FontSize="14"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
