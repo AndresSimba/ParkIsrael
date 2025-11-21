@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ParkIsrael_Octavo.Views.vRegistro"
+             Title="vRegistro">
+    <ScrollView>
+    <VerticalStackLayout
+        Spacing="15"
+        Padding="15">
+            <Button Text="REGISTRO"
+                BackgroundColor="DarkOrange"
+                TextColor="White"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                HeightRequest="45"/>
+
+            
+            <Label Text="APELLIDOS:" 
+               FontAttributes="Bold"/>
+            <Entry x:Name="txtApellidos"
+               Placeholder=""
+               HeightRequest="40"
+               BackgroundColor="White"
+               TextColor="Black"
+               />
+
+            
+            <Label Text="NOMBRES:" 
+               FontAttributes="Bold"/>
+            <Entry x:Name="txtNombres"
+               HeightRequest="40"
+               BackgroundColor="White"
+               TextColor="Black"
+               />
+
+            
+            <Label Text="CEDULA:" 
+               FontAttributes="Bold"/>
+            <Entry x:Name="txtCedula"
+               Keyboard="Numeric"
+               MaxLength="10"
+               HeightRequest="40"
+               BackgroundColor="White"
+               TextColor="Black"
+               />
+
+            
+            <Label Text="PLACA VEHICULAR:" 
+               FontAttributes="Bold"/>
+            <Entry x:Name="txtPlaca"
+               HeightRequest="40"
+               BackgroundColor="White"
+               TextColor="Black"
+               />
+
+            
+            <Label Text="USUARIO:" 
+               FontAttributes="Bold"/>
+            <Entry x:Name="txtUsuario"
+               HeightRequest="40"
+               BackgroundColor="White"
+               TextColor="Black"
+               />
+
+            
+            <Label Text="CONTRASEÑA:" 
+               FontAttributes="Bold"/>
+            <Entry x:Name="txtContraseña"
+               IsPassword="True"
+               HeightRequest="40"
+               BackgroundColor="White"
+               TextColor="Black"
+               />
+
+            
+            <Button x:Name="btnGuardar" 
+                Text="GUARDAR"
+                Clicked="btnGuardar_Clicked"
+                BackgroundColor="#4A80E3"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="45"
+                />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

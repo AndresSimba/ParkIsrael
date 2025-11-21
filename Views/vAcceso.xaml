@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ParkIsrael_Octavo.Views.vAcceso"
+             Title="vAcceso">
+    <ScrollView>
+    <VerticalStackLayout Spacing="15"
+                         Padding="15">
+
+            <Grid RowSpacing="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Image x:Name="ImageQR"
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Grid.Row="0"
+                       Grid.Column="0"/>
+
+                <Button x:Name="btnGenerarQR"
+                    Text="Generar QR"
+                    Clicked="btnGenerarQR_Clicked"            
+                    BackgroundColor="DarkOrange"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    HeightRequest="45"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                        />
+
+
+                <Button Text="->"
+                     x:Name="btnSiguiente"
+                     Clicked="btnSiguiente_Clicked"
+                     BackgroundColor="DarkOrange"
+                     FontAttributes="Bold"
+                     HeightRequest="45"
+                     TextColor="White"
+                     CornerRadius="10"
+                     Grid.Column="0"
+                     Grid.Row="2"
+                     />    
+            </Grid>
+            
+        
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
