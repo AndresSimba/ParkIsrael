@@ -22,7 +22,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -47,17 +46,63 @@
                     HeightRequest="45"
                     Grid.Column="0"
                     Grid.Row="1"/>
+            </Grid>
+
+            <Label
+                Text="UBICAR SEDE"
+                FontAttributes="Bold"
+                FontSize="20">                
+            </Label>
+
+            <Grid
+                ColumnSpacing="10">
                 
-                <Button Text="->"
-                     x:Name="btnSiguiente"
-                     Clicked="btnSiguiente_Clicked"
-                     BackgroundColor="DarkOrange"
-                     FontAttributes="Bold"
-                     HeightRequest="45"
-                     TextColor="White"
-                     CornerRadius="10"
-                     Grid.Column="0"
-                     Grid.Row="2"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Grid.Row="0" Grid.Column="0"
+                    x:Name="btnSede_1"
+                    Text="MATRIZ"
+                    BackgroundColor="DarkOrange"
+                    FontAttributes="Bold"
+                    HeightRequest="45"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Clicked="btnSede_1_Clicked">
+                </Button>
+
+                <Button
+                    Grid.Row="0" Grid.Column="1"
+                    x:Name="btnSede_2"
+                    Text="ESCUELA DE IDIOMAS"
+                    BackgroundColor="DarkOrange"
+                    FontAttributes="Bold"
+                    HeightRequest="45"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Clicked="btnSede_2_Clicked">
+                </Button>
+
+                <Button
+                    Grid.Row="0" Grid.Column="2"
+                    x:Name="btnSede_3"
+                    Text="ESCUELA DE POSGRADOS"
+                    BackgroundColor="DarkOrange"
+                    FontAttributes="Bold"
+                    HeightRequest="45"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Clicked="btnSede_3_Clicked">
+                </Button>
+
             </Grid>
 
         </VerticalStackLayout>

@@ -16,7 +16,7 @@ public partial class vRegistro : ContentPage
                 string.IsNullOrWhiteSpace(txtApellidos.Text)||
                 string.IsNullOrWhiteSpace(txtPlaca.Text)||
                 string.IsNullOrWhiteSpace(txtUsuario.Text)||
-                string.IsNullOrWhiteSpace(txtContraseña.Text))
+                string.IsNullOrWhiteSpace(txtContrasena.Text))
             {
                 await DisplayAlert("Campos incompletos",
                     "Llenar todos los Campos",

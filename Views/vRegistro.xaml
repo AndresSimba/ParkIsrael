@@ -75,7 +75,7 @@
             <Label Text="CONTRASEÑA:" FontAttributes="Bold"/>
         
             <Entry
-                x:Name="txtContraseña"
+                x:Name="txtContrasena"
                 IsPassword="True"
                 HeightRequest="40"
                 BackgroundColor="White"
