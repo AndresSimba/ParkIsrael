@@ -28,7 +28,6 @@ public partial class vRegistro : ContentPage
 		}
 		catch (Exception ex)
 		{
-
             Console.WriteLine($"Error al Ingresar: {ex.Message}");
         }
     }

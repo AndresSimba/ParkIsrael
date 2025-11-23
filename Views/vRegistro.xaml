@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkIsrael_Octavo.Views.vRegistro"
              Title="vRegistro">
+    
     <ScrollView>
     <VerticalStackLayout
         Spacing="15"
         Padding="15">
+        
             <Button Text="REGISTRO"
                 BackgroundColor="DarkOrange"
                 TextColor="White"

@@ -2,14 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkIsrael_Octavo.Views.vLogin"
-             Title="vLogin">
+             Title="vLogin"
+             BackgroundColor="Lavender">
+    
     <ScrollView>
     <VerticalStackLayout
         Spacing="15"
         Padding="15">
-            <Image Source="parkuisrael.png"
+            <Image Source="logo2.png"
                    
-                   MaximumHeightRequest="150"
+                   MaximumHeightRequest="350"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    />
@@ -17,14 +19,14 @@
                    Placeholder="Usuario"
                    FontAttributes="Bold"
                    PlaceholderColor="Black"
-                   BackgroundColor="White"
+                   BackgroundColor="Lavender"
                    HeightRequest="40"
                    TextColor="Black"/>
             <Entry x:Name="txtContrasena"
                    Placeholder="Contraseña"
                    PlaceholderColor="Black"
                    FontAttributes="Bold"
-                   BackgroundColor="White"
+                   BackgroundColor="Lavender"
                    HeightRequest="40"
                    TextColor="Black"
                    IsPassword="True"/>
