@@ -40,12 +40,13 @@ public partial class vAcceso : ContentPage
     {
         try
         {
-            string contenidoQR = "ACCESO-PARK-ISRAEL";
+            /*string contenidoQR = "ACCESO-PARK-ISRAEL";
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(contenidoQR, QRCodeGenerator.ECCLevel.Q);
             PngByteQRCode qrCode = new PngByteQRCode(qrCodeData);
             byte[] qrBytes = qrCode.GetGraphic(10);
-            ImageQR.Source = ImageSource.FromStream(() => new MemoryStream(qrBytes));
+            ImageQR.Source = ImageSource.FromStream(() => new MemoryStream(qrBytes));*/
+            Navigation.PushAsync(new vQR());
         }
         catch (Exception ex)
         {

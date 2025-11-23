@@ -11,7 +11,6 @@ public partial class vLogin : ContentPage
     {
 		try
         {
-            
             if (string.IsNullOrWhiteSpace(txtUsuario.Text) ||
                 string.IsNullOrWhiteSpace(txtContrasena.Text))
             {
@@ -19,18 +18,14 @@ public partial class vLogin : ContentPage
                     "Por favor ingrese usuario y contraseña.",
                     "Aceptar");
                 return; 
-            }
-
-            
+            }            
             await Navigation.PushAsync(new vAcceso());
             await DisplayAlert("Bienvenido", "", "Cerrar");
         }
         catch (Exception ex)
 		{
-
             Console.WriteLine($"Error al Ingresar: {ex.Message}");
         }
-
     }
 
     private async void btnRegistro_Clicked(object sender, EventArgs e)
@@ -41,9 +36,7 @@ public partial class vLogin : ContentPage
         }
 		catch (Exception ex)
 		{
-
             Console.WriteLine($"Error al Regsitrar: {ex.Message}");
         }
-
     }
 }

@@ -11,7 +11,7 @@
         
             <Image
                 Source="logo.png"
-                MaximumHeightRequest="350"
+                MaximumHeightRequest="250"
                 VerticalOptions="Center"
                 HorizontalOptions="Center">            
             </Image>
