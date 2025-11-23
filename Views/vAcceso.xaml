@@ -55,15 +55,15 @@
             </Label>
 
             <Grid
-                ColumnSpacing="10">
+                RowSpacing="15">
                 
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
@@ -80,7 +80,7 @@
                 </Button>
 
                 <Button
-                    Grid.Row="0" Grid.Column="1"
+                    Grid.Row="1" Grid.Column="0"
                     x:Name="btnSede_2"
                     Text="ESCUELA DE IDIOMAS"
                     BackgroundColor="DarkOrange"
@@ -92,7 +92,7 @@
                 </Button>
 
                 <Button
-                    Grid.Row="0" Grid.Column="2"
+                    Grid.Row="2" Grid.Column="0"
                     x:Name="btnSede_3"
                     Text="ESCUELA DE POSGRADOS"
                     BackgroundColor="DarkOrange"
@@ -104,6 +104,11 @@
                 </Button>
 
             </Grid>
+
+            <Image
+                Source="uisrael.jpg"
+                MaximumHeightRequest="55">
+            </Image>
 
         </VerticalStackLayout>
     </ScrollView>

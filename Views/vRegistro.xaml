@@ -93,6 +93,11 @@
                 CornerRadius="10">
             </Button>
 
+            <Image
+                Source="uisrael.jpg"
+                MaximumHeightRequest="55">
+            </Image>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
