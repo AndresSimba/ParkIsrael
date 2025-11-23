@@ -3,11 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkIsrael_Octavo.Views.vAcceso"
              Title="vAcceso">
+    
     <ScrollView>
-    <VerticalStackLayout Spacing="15"
-                         Padding="15">
+        <VerticalStackLayout
+            Spacing="15"
+            Padding="15">
+            
+            <Image
+                Source="logo.png"
+                MaximumHeightRequest="250"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+            </Image>
+            
+            <Grid
+                RowSpacing="20">
 
-            <Grid RowSpacing="15">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -35,10 +46,8 @@
                     FontAttributes="Bold"
                     HeightRequest="45"
                     Grid.Column="0"
-                    Grid.Row="1"
-                        />
-
-
+                    Grid.Row="1"/>
+                
                 <Button Text="->"
                      x:Name="btnSiguiente"
                      Clicked="btnSiguiente_Clicked"
@@ -48,11 +57,9 @@
                      TextColor="White"
                      CornerRadius="10"
                      Grid.Column="0"
-                     Grid.Row="2"
-                     />    
+                     Grid.Row="2"/>
             </Grid>
-            
-        
-    </VerticalStackLayout>
+
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

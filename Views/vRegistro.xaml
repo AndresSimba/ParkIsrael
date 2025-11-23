@@ -5,85 +5,93 @@
              Title="vRegistro">
     
     <ScrollView>
-    <VerticalStackLayout
-        Spacing="15"
-        Padding="15">
+        <VerticalStackLayout
+            Spacing="15"
+            Padding="15">
         
-            <Button Text="REGISTRO"
-                BackgroundColor="DarkOrange"
-                TextColor="White"
-                CornerRadius="10"
+            <Image
+                Source="logo.png"
+                MaximumHeightRequest="250"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">            
+            </Image>
+        
+            <Label
+                Text="REGISTRO NUEVO USUARIO"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
                 FontAttributes="Bold"
-                HeightRequest="45"/>
+                FontSize="20">            
+            </Label>
 
-            
-            <Label Text="APELLIDOS:" 
-               FontAttributes="Bold"/>
-            <Entry x:Name="txtApellidos"
-               Placeholder=""
-               HeightRequest="40"
-               BackgroundColor="White"
-               TextColor="Black"
-               />
+                <Label Text="APELLIDOS:" FontAttributes="Bold"/>
+        
+            <Entry
+                x:Name="txtApellidos"
+                Placeholder=""
+                HeightRequest="40"
+                BackgroundColor="White"
+                TextColor="Black">            
+            </Entry>
+        
+            <Label Text="NOMBRES:" FontAttributes="Bold"/>
+        
+            <Entry
+                x:Name="txtNombres"
+                HeightRequest="40"
+                BackgroundColor="White"
+                TextColor="Black">            
+            </Entry>
+        
+            <Label Text="CEDULA:" FontAttributes="Bold"/>
+        
+            <Entry
+                x:Name="txtCedula"
+                Keyboard="Numeric"
+                MaxLength="10"
+                HeightRequest="40"
+                BackgroundColor="White"
+                TextColor="Black">            
+            </Entry>
+        
+            <Label Text="PLACA VEHICULAR:" FontAttributes="Bold"/>
+        
+            <Entry
+                x:Name="txtPlaca"
+                HeightRequest="40"
+                BackgroundColor="White"
+                TextColor="Black">            
+            </Entry>
+        
+            <Label Text="USUARIO:" FontAttributes="Bold"/>
+        
+            <Entry
+                x:Name="txtUsuario"
+                HeightRequest="40"
+                BackgroundColor="White"
+                TextColor="Black">            
+            </Entry>
+        
+            <Label Text="CONTRASEÑA:" FontAttributes="Bold"/>
+        
+            <Entry
+                x:Name="txtContraseña"
+                IsPassword="True"
+                HeightRequest="40"
+                BackgroundColor="White"
+                TextColor="Black">            
+            </Entry>
 
-            
-            <Label Text="NOMBRES:" 
-               FontAttributes="Bold"/>
-            <Entry x:Name="txtNombres"
-               HeightRequest="40"
-               BackgroundColor="White"
-               TextColor="Black"
-               />
-
-            
-            <Label Text="CEDULA:" 
-               FontAttributes="Bold"/>
-            <Entry x:Name="txtCedula"
-               Keyboard="Numeric"
-               MaxLength="10"
-               HeightRequest="40"
-               BackgroundColor="White"
-               TextColor="Black"
-               />
-
-            
-            <Label Text="PLACA VEHICULAR:" 
-               FontAttributes="Bold"/>
-            <Entry x:Name="txtPlaca"
-               HeightRequest="40"
-               BackgroundColor="White"
-               TextColor="Black"
-               />
-
-            
-            <Label Text="USUARIO:" 
-               FontAttributes="Bold"/>
-            <Entry x:Name="txtUsuario"
-               HeightRequest="40"
-               BackgroundColor="White"
-               TextColor="Black"
-               />
-
-            
-            <Label Text="CONTRASEÑA:" 
-               FontAttributes="Bold"/>
-            <Entry x:Name="txtContraseña"
-               IsPassword="True"
-               HeightRequest="40"
-               BackgroundColor="White"
-               TextColor="Black"
-               />
-
-            
-            <Button x:Name="btnGuardar" 
+            <Button
+                x:Name="btnGuardar"
                 Text="GUARDAR"
                 Clicked="btnGuardar_Clicked"
-                BackgroundColor="#4A80E3"
-                TextColor="White"
+                BackgroundColor="DarkOrange"
                 FontAttributes="Bold"
-                CornerRadius="10"
                 HeightRequest="45"
-                />
+                TextColor="White"
+                CornerRadius="10">
+            </Button>
 
         </VerticalStackLayout>
     </ScrollView>

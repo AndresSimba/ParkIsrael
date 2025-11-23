@@ -2,54 +2,63 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkIsrael_Octavo.Views.vLogin"
-             Title="vLogin"
-             BackgroundColor="Lavender">
+             Title="vLogin">
     
     <ScrollView>
-    <VerticalStackLayout
-        Spacing="15"
-        Padding="15">
-            <Image Source="logo2.png"
-                   
-                   MaximumHeightRequest="350"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"
-                   />
-            <Entry x:Name="txtUsuario"
-                   Placeholder="Usuario"
-                   FontAttributes="Bold"
-                   PlaceholderColor="Black"
-                   BackgroundColor="Lavender"
-                   HeightRequest="40"
-                   TextColor="Black"/>
-            <Entry x:Name="txtContrasena"
-                   Placeholder="Contraseña"
-                   PlaceholderColor="Black"
-                   FontAttributes="Bold"
-                   BackgroundColor="Lavender"
-                   HeightRequest="40"
-                   TextColor="Black"
-                   IsPassword="True"/>
+        <VerticalStackLayout
+            Spacing="15"
+            Padding="15">
+        
+            <Image
+                Source="logo.png"
+                MaximumHeightRequest="350"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">            
+            </Image>
+        
+            <Entry
+                x:Name="txtUsuario"
+                Placeholder="Usuario"
+                FontAttributes="Bold"
+                PlaceholderColor="Black"
+                HeightRequest="40"
+                TextColor="Black">            
+            </Entry>
+        
+            <Entry
+                x:Name="txtContrasena"
+                Placeholder="Contraseña"
+                PlaceholderColor="Black"
+                FontAttributes="Bold"
+                HeightRequest="40"
+                TextColor="Black"
+                IsPassword="True">            
+            </Entry>
+        
+            <Button
+                x:Name="btnIngresar"
+                Text="Ingresar"
+                TextColor="White"
+                BorderColor="Orange"
+                HeightRequest="45"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                BackgroundColor="DarkOrange"
+                Clicked="btnIngresar_Clicked">            
+            </Button>
 
-            <Button x:Name="btnIngresar"
-                    Text="Ingresar"
-                    TextColor="White"
-                    BorderColor="Orange"
-                    HeightRequest="45"
-                    CornerRadius="10"
-                    FontAttributes="Bold"
-                    BackgroundColor="DarkOrange"
-                    Clicked="btnIngresar_Clicked"/>
+            <Button
+                x:Name="btnRegistro"
+                Text="Registrar"
+                TextColor="White"
+                BackgroundColor="DarkOrange"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="45"
+                BorderColor="Orange"
+                Clicked="btnRegistro_Clicked">
+            </Button>
 
-            <Button x:Name="btnRegistro"
-                    Text="Registrar"
-                    TextColor="White"
-                    BackgroundColor="DarkOrange"
-                    FontAttributes="Bold"
-                    CornerRadius="10"
-                    HeightRequest="45"
-                    BorderColor="Orange"
-                    Clicked="btnRegistro_Clicked"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

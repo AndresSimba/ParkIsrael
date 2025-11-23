@@ -1,6 +1,5 @@
 
 using QRCoder;
-
 namespace ParkIsrael_Octavo.Views;
 
 public partial class vAcceso : ContentPage
@@ -8,8 +7,8 @@ public partial class vAcceso : ContentPage
     public vAcceso()
     {
         InitializeComponent();
-    }
 
+    }
 
 
     private async void btnSiguiente_Clicked(object sender, EventArgs e)
@@ -36,4 +35,5 @@ public partial class vAcceso : ContentPage
             DisplayAlert("Error", ex.Message, "OK");
         }
     }
+
 }
