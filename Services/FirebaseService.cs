@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ParkIsrael_Octavo.Models;
 
+
 namespace ParkIsrael_Octavo.Services
 {
     public class FirestoreService
@@ -197,6 +198,50 @@ namespace ParkIsrael_Octavo.Services
             {
                 return null;
             }
+        }
+
+        public async Task<List<UsuarioModel>> ObtenerUsuariosAsync()
+        {
+            List<UsuarioModel> lista = new();
+            try
+            {
+                string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/{collection}";
+                var response = await client.GetAsync(url);
+                var json = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                    return lista;
+
+                dynamic data = JsonConvert.DeserializeObject(json);
+
+                foreach (var item in data.documents)
+                {
+                    var f = item.fields;
+
+                    lista.Add(new UsuarioModel(
+                        Id: int.Parse((string)f.id.integerValue),
+                        Apellidos: (string)f.apellidos.stringValue,
+                        Nombres: (string)f.nombres.stringValue,
+                        Cedula: (string)f.cedula.stringValue,
+                        Telefono: (string)f.telefono.stringValue,
+                        Correo: (string)f.correo.stringValue,
+                        Status: (string)f.status.stringValue,
+                        TipoVehiculo: (string)f.tipoVehiculo.stringValue,
+                        PlacaVehicular: (string)f.placaVehicular.stringValue,
+                        Usuario: (string)f.usuario.stringValue,
+                        Contrasena: (string)f.contrasena.stringValue,
+                        Activo: (string)f.activo.stringValue,
+                        Imagen: (string)f.imagen.stringValue,
+                        Mensaje: ""
+                    ));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ERROR ObtenerUsuariosAsync(): {ex.Message}");
+            }
+
+            return lista;
         }
     }
 }

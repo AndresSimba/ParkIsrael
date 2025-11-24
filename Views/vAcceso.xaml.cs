@@ -1,4 +1,3 @@
-using QRCoder;
 using ParkIsrael_Octavo.Models;
 
 namespace ParkIsrael_Octavo.Views;
@@ -72,7 +71,7 @@ public partial class vAcceso : ContentPage
 
     private void btnGenerarQR_Clicked(object sender, EventArgs e)
     {
-            Navigation.PushAsync(new vQR());
+        Navigation.PushAsync(new vQR(Usuario));
     }
 
     private async void btnSede_1_Clicked(object sender, EventArgs e)

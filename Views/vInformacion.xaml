@@ -3,10 +3,96 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkIsrael_Octavo.Views.vInformacion"
              Title="vInformacion">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <Label
+                Text="LISTADO DE USUARIOS"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontAttributes="Bold"
+                FontSize="22"
+                TextColor="DarkOrange"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Text="Id" FontAttributes="Bold"/>
+                <Label Grid.Column="1" Text="Apellidos" FontAttributes="Bold"/>
+                <Label Grid.Column="2" Text="Nombres" FontAttributes="Bold"/>
+                <Label Grid.Column="3" Text="Cedula" FontAttributes="Bold"/>
+                <Label Grid.Column="4" Text="Telefono" FontAttributes="Bold"/>
+                <Label Grid.Column="5" Text="Correo" FontAttributes="Bold"/>
+                <Label Grid.Column="6" Text="Status" FontAttributes="Bold"/>
+                <Label Grid.Column="7" Text="T. Vehiculo" FontAttributes="Bold"/>
+                <Label Grid.Column="8" Text="Placa" FontAttributes="Bold"/>
+                <Label Grid.Column="9" Text="Usuario" FontAttributes="Bold"/>
+                <Label Grid.Column="10" Text="Contraseña" FontAttributes="Bold"/>
+                <Label Grid.Column="11" Text="Activo" FontAttributes="Bold"/>
+
+            </Grid>
+
+            <ListView x:Name="lvUsuarios"
+                      ItemSelected="lvUsuarios_ItemSelected"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="Default">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Text="{Binding Id}" />
+                                    <Label Grid.Column="1" Text="{Binding Apellidos}" />
+                                    <Label Grid.Column="2" Text="{Binding Nombres}" />
+                                    <Label Grid.Column="3" Text="{Binding Cedula}" />
+                                    <Label Grid.Column="4" Text="{Binding Telefono}" />
+                                    <Label Grid.Column="5" Text="{Binding Correo}" />
+                                    <Label Grid.Column="6" Text="{Binding Status}" />
+                                    <Label Grid.Column="7" Text="{Binding TipoVehiculo}" />
+                                    <Label Grid.Column="8" Text="{Binding PlacaVehicular}" />
+                                    <Label Grid.Column="9" Text="{Binding Usuario}" />
+                                    <Label Grid.Column="10" Text="{Binding Contrasena}" />
+                                    <Label Grid.Column="11" Text="{Binding Activo}" />
+
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

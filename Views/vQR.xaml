@@ -4,28 +4,30 @@
              x:Class="ParkIsrael_Octavo.Views.vQR"
              Title="vQR">
     
-    <VerticalStackLayout
-        Spacing="15"
-        Padding="15">
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="15"
+            Padding="15">
+            
+            <Image
+                Source="logo.png"
+                MaximumHeightRequest="250"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">                
+            </Image>
+
+            <Image
+                x:Name="imgQR"
+                MaximumHeightRequest="250"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">                
+            </Image>
+            
+            <Image
+                Source="uisrael.jpg"
+                MaximumHeightRequest="55">                
+            </Image>
         
-        <Image 
-            Source="logo.png"
-            MaximumHeightRequest="250"
-            VerticalOptions="Center"
-            HorizontalOptions="Center">
-        </Image>
-
-        <Image
-            x:Name="imgQR"
-            MaximumHeightRequest="400"
-            VerticalOptions="Center"
-            HorizontalOptions="Center">            
-        </Image>
-
-        <Image
-            Source="uisrael.jpg"
-            MaximumHeightRequest="55">
-        </Image>
-
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

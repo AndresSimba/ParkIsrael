@@ -31,7 +31,7 @@
         
             <Button
                 x:Name="btnIngresar"
-                Text="Ingresar"
+                Text="INGRESAR"
                 TextColor="White"
                 BorderColor="Orange"
                 HeightRequest="45"
@@ -43,7 +43,7 @@
 
             <Button
                 x:Name="btnRegistro"
-                Text="Registrar"
+                Text="REGISTRAR"
                 TextColor="White"
                 BackgroundColor="DarkOrange"
                 FontAttributes="Bold"

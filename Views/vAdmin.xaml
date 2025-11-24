@@ -3,10 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkIsrael_Octavo.Views.vAdmin"
              Title="vAdmin">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="15"
+            Padding="15">
+            
+            <Image
+                Source="logo.png"
+                MaximumHeightRequest="250"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">                
+            </Image>
+
+            <Button
+                x:Name="btnAdmin"
+                Text="ADMINISTRACION"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="45"
+                Clicked="btnAdmin_Clicked">                
+            </Button>
+            
+            <Button
+                x:Name="Control"
+                Text="CONTROL"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="45"
+                Clicked="Control_Clicked"></Button>
+            
+            <Image
+                Source="uisrael.jpg"
+                MaximumHeightRequest="55">
+            </Image>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
