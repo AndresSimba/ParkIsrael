@@ -1,11 +1,45 @@
 using QRCoder;
+using ParkIsrael_Octavo.Models;
+
 namespace ParkIsrael_Octavo.Views;
 
 public partial class vAcceso : ContentPage
 {
-    public vAcceso()
+    private UsuarioModel Usuario; // Guardamos los datos
+    public vAcceso(UsuarioModel usuario)
     {
         InitializeComponent();
+        Usuario = usuario;
+        CargarDatos();
+    }
+        private void CargarDatos()
+    {
+        lblNombre.Text = $"{Usuario.Nombres} {Usuario.Apellidos}";
+        lblCedula.Text = Usuario.Cedula;
+        lblTelefono.Text = Usuario.Telefono;
+        lblCorreo.Text = Usuario.Correo;
+        lblStatus.Text = Usuario.Status;
+        lblTipoVehiculo.Text = Usuario.TipoVehiculo;
+        lblPlaca.Text = Usuario.PlacaVehicular;
+        lblEstado.Text= Usuario.Activo;
+
+        if (Usuario.Activo != null && Usuario.Activo.Trim().ToUpper() == "SI")
+        {
+            lblEstado.Text = "ACTIVO";
+            lblEstado.TextColor = Colors.Green;
+        }
+        else
+        {
+            lblEstado.Text = "INACTIVO";
+            lblEstado.TextColor = Colors.Red;
+        }
+
+        // Cargar imagen Base64
+        if (!string.IsNullOrEmpty(Usuario.Imagen))
+        {
+            byte[] bytes = Convert.FromBase64String(Usuario.Imagen);
+            imgPerfil.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
+        }
     }
 
     // Coordenadas fijas de las sedes
@@ -38,20 +72,7 @@ public partial class vAcceso : ContentPage
 
     private void btnGenerarQR_Clicked(object sender, EventArgs e)
     {
-        try
-        {
-            /*string contenidoQR = "ACCESO-PARK-ISRAEL";
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(contenidoQR, QRCodeGenerator.ECCLevel.Q);
-            PngByteQRCode qrCode = new PngByteQRCode(qrCodeData);
-            byte[] qrBytes = qrCode.GetGraphic(10);
-            ImageQR.Source = ImageSource.FromStream(() => new MemoryStream(qrBytes));*/
             Navigation.PushAsync(new vQR());
-        }
-        catch (Exception ex)
-        {
-            DisplayAlert("Error", ex.Message, "OK");
-        }
     }
 
     private async void btnSede_1_Clicked(object sender, EventArgs e)

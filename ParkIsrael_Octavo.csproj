@@ -71,6 +71,9 @@
 	  <MauiXaml Update="Views\vAcceso.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\vAdmin.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\vControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

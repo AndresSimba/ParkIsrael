@@ -1,3 +1,6 @@
+using ParkIsrael_Octavo.Services;
+using ParkIsrael_Octavo.Models;
+
 namespace ParkIsrael_Octavo.Views;
 
 public partial class vLogin : ContentPage
@@ -9,23 +12,38 @@ public partial class vLogin : ContentPage
 
     private async void btnIngresar_Clicked(object sender, EventArgs e)
     {
-		try
+        string usuario = txtUsuario.Text;
+        string contra = txtContrasena.Text;
+
+        var service = new FirestoreService();
+        var login = await service.LoginAsync(usuario, contra);
+
+        if (!login.ok)
         {
-            if (string.IsNullOrWhiteSpace(txtUsuario.Text) ||
-                string.IsNullOrWhiteSpace(txtContrasena.Text))
+            await DisplayAlert("Error", login.mensaje, "OK");
+            return;
+        }
+
+        //si el usuario es administrador va a paras a la View vAdmin
+        if (login.status == "administrador")
+        {
+            await Navigation.PushAsync(new vAdmin());
+            return;
+        }
+
+        //si el usuario es estudiante pasa a la View vAcceso y carga los datos del usuario
+        if (login.status == "estudiante")
+        {
+            UsuarioModel? datosUsuario = await service.ObtenerUsuarioPorNombreAsync(usuario);
+            if (datosUsuario is null)
             {
-                await DisplayAlert("Campos incompletos",
-                    "Por favor ingrese usuario y contraseña.",
-                    "Aceptar");
-                return; 
-            }            
-            await Navigation.PushAsync(new vAcceso());
-            await DisplayAlert("Bienvenido", "", "Cerrar");
+                await DisplayAlert("Error", "No se pudo cargar la información del usuario", "OK");
+                return;
+            }
+            await Navigation.PushAsync(new vAcceso(datosUsuario));
+            return;
         }
-        catch (Exception ex)
-		{
-            Console.WriteLine($"Error al Ingresar: {ex.Message}");
-        }
+        await DisplayAlert("Error", "Status desconocido en la base", "OK");
     }
 
     private async void btnRegistro_Clicked(object sender, EventArgs e)

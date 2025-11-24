@@ -15,28 +15,75 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center">
             </Image>
-            
-            <Grid
-                RowSpacing="20">
 
+            <Frame
+                CornerRadius="125"
+                HeightRequest="250"
+                WidthRequest="250"
+                Padding="0"
+                HasShadow="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Image
+                    x:Name="imgPerfil"
+                    Aspect="AspectFill"
+                    HeightRequest="250"
+                    WidthRequest="250">                    
+                </Image>
+            </Frame>
+
+            <Label
+                x:Name="lblNombre"
+                FontSize="20"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                FontAttributes="Bold">                
+            </Label>
+
+            <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Image x:Name="ImageQR"
-                       HeightRequest="200"
-                       WidthRequest="200"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       Grid.Row="0"
-                       Grid.Column="0"/>
+                <!-- FILA 0 -->
+                <Label Grid.Row="0" Grid.Column="0" Text="CI:" FontAttributes="Bold"/>
+                <Label Grid.Row="0" Grid.Column="1" x:Name="lblCedula" HorizontalOptions="Start"/>
 
-                <Button x:Name="btnGenerarQR"
+                <Label Grid.Row="0" Grid.Column="2" Text="Cel:" FontAttributes="Bold"/>
+                <Label Grid.Row="0" Grid.Column="3" x:Name="lblTelefono" HorizontalOptions="Start"/>
+
+                <!-- FILA 1 -->
+                <Label Grid.Row="1" Grid.Column="0" Text="Correo:" FontAttributes="Bold"/>
+                <Label Grid.Row="1" Grid.Column="1" x:Name="lblCorreo" Grid.ColumnSpan="3"/>
+
+                <!-- FILA 2 -->
+                <Label Grid.Row="2" Grid.Column="0" Text="Status:" FontAttributes="Bold"/>
+                <Label Grid.Row="2" Grid.Column="1" x:Name="lblStatus" HorizontalOptions="Start"/>
+
+                <Label Grid.Row="2" Grid.Column="2" Text="Estado:" FontAttributes="Bold"/>
+                <Label Grid.Row="2" Grid.Column="3" x:Name="lblEstado" HorizontalOptions="Start" FontAttributes="Bold"/>
+
+                <!-- FILA 3 -->
+                <Label Grid.Row="3" Grid.Column="0" Text="T. Vehiculo:" FontAttributes="Bold"/>
+                <Label Grid.Row="3" Grid.Column="1" x:Name="lblTipoVehiculo" HorizontalOptions="Start"/>
+
+                <Label Grid.Row="3" Grid.Column="2" Text="Placa:" FontAttributes="Bold"/>
+                <Label Grid.Row="3" Grid.Column="3" x:Name="lblPlaca" HorizontalOptions="Start"/>
+            </Grid>
+
+
+            <Button x:Name="btnGenerarQR"
                     Text="Generar QR"
                     Clicked="btnGenerarQR_Clicked"            
                     BackgroundColor="DarkOrange"
@@ -46,7 +93,6 @@
                     HeightRequest="45"
                     Grid.Column="0"
                     Grid.Row="1"/>
-            </Grid>
 
             <Label
                 Text="UBICAR SEDE"

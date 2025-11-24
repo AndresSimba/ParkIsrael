@@ -15,23 +15,17 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center">            
             </Image>
-        
+
             <Entry
                 x:Name="txtUsuario"
                 Placeholder="Usuario"
-                FontAttributes="Bold"
-                PlaceholderColor="Black"
-                HeightRequest="40"
-                TextColor="Black">            
+                HeightRequest="40">
             </Entry>
         
             <Entry
                 x:Name="txtContrasena"
                 Placeholder="Contraseña"
-                PlaceholderColor="Black"
-                FontAttributes="Bold"
                 HeightRequest="40"
-                TextColor="Black"
                 IsPassword="True">            
             </Entry>
         
