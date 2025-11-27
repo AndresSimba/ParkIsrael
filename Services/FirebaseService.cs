@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using ParkIsrael_Octavo.Models;
+using System;
+using System.Buffers.Text;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using ParkIsrael_Octavo.Models;
 
 
 namespace ParkIsrael_Octavo.Services
@@ -103,54 +104,7 @@ namespace ParkIsrael_Octavo.Services
             try
             {
                 string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents:runQuery";
-                var query = new
-                {
-                    structuredQuery = new
-                    {
-                        from = new[]
-                        {
-                            new { collectionId = "usuarios" }
-                        },
-                        where = new
-                        {
-                            fieldFilter = new
-                            {
-                                field = new { fieldPath = "usuario" },
-                                op = "EQUAL",
-                                value = new { stringValue = usuario }
-                            }
-                        }
-                    }
-                };
-                var json = JsonConvert.SerializeObject(query);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(url, content);
-                var responseText = await response.Content.ReadAsStringAsync();
-                if (!response.IsSuccessStatusCode)
-                    return (false, "", "Error consultando Firestore");
-                dynamic data = JsonConvert.DeserializeObject(responseText);
 
-                // revisar si existe
-                if (data == null || data[0].document == null)
-                    return (false, "", "Usuario no encontrado");
-                string passFirestore = data[0].document.fields.contrasena.stringValue;
-                string status = data[0].document.fields.status.stringValue;
-                if (passFirestore != contrasena)
-                    return (false, "", "Contraseña incorrecta");
-                return (true, status, "Login correcto");
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error LoginAsync(): {ex.Message}");
-                return (false, "", "Error interno en el login");
-            }
-        }
-
-        public async Task<UsuarioModel?> ObtenerUsuarioPorNombreAsync(string usuario)
-        {
-            try
-            {
-                string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents:runQuery";
                 var query = new
                 {
                     structuredQuery = new
@@ -167,36 +121,100 @@ namespace ParkIsrael_Octavo.Services
                         }
                     }
                 };
+
                 var json = JsonConvert.SerializeObject(query);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, content);
                 var responseText = await response.Content.ReadAsStringAsync();
+
                 if (!response.IsSuccessStatusCode)
-                    return null;
+                    return (false, "", "Error consultando Firestore");
+
                 dynamic data = JsonConvert.DeserializeObject(responseText);
-                if (data == null || data[0].document == null)
-                    return null;
-                var doc = data[0].document.fields;
-                return new UsuarioModel(
-                    Id: int.Parse((string)doc.id.integerValue),
-                    Apellidos: (string)doc.apellidos.stringValue,
-                    Nombres: (string)doc.nombres.stringValue,
-                    Cedula: (string)doc.cedula.stringValue,
-                    Telefono: (string)doc.telefono.stringValue,
-                    Correo: (string)doc.correo.stringValue,
-                    Status: (string)doc.status.stringValue,
-                    TipoVehiculo: (string)doc.tipoVehiculo.stringValue,
-                    PlacaVehicular: (string)doc.placaVehicular.stringValue,
-                    Usuario: (string)doc.usuario.stringValue,
-                    Contrasena: (string)doc.contrasena.stringValue,
-                    Activo: (string)doc.activo.stringValue,
-                    Imagen: (string)doc.imagen.stringValue,
+
+                // 🔥 Validación correcta: Firestore muchas veces devuelve [{}] cuando NO encuentra nada
+                if (data == null || data.Count == 0 || data[0].document == null)
+                    return (false, "", "Usuario no encontrado");
+
+                string passFirestore = data[0].document.fields.contrasena.stringValue;
+                string status = data[0].document.fields.status.stringValue;
+
+                if (passFirestore != contrasena)
+                    return (false, "", "Contraseña incorrecta");
+
+                return (true, status, "Login correcto");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error LoginAsync(): {ex.Message}");
+                return (false, "", "Error interno en el login");
+            }
+        }
+
+        public async Task<(UsuarioModel? usuario, string documentId)> ObtenerUsuarioPorNombreAsync(string usuario)
+        {
+            try
+            {
+                string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents:runQuery";
+
+                var query = new
+                {
+                    structuredQuery = new
+                    {
+                        from = new[] { new { collectionId = "usuarios" } },
+                        where = new
+                        {
+                            fieldFilter = new
+                            {
+                                field = new { fieldPath = "usuario" },
+                                op = "EQUAL",
+                                value = new { stringValue = usuario }
+                            }
+                        }
+                    }
+                };
+
+                var json = JsonConvert.SerializeObject(query);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, content);
+                var responseText = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                    return (null, "");
+
+                dynamic data = JsonConvert.DeserializeObject(responseText);
+
+                // 🔥 validación correcta
+                if (data == null || data.Count == 0 || data[0].document == null)
+                    return (null, "");
+
+                var doc = data[0].document;
+                string docId = ((string)doc.name).Split('/').Last();
+
+                var fields = doc.fields;
+
+                var usuarioModel = new UsuarioModel(
+                    Id: int.Parse((string)fields.id.integerValue),
+                    Apellidos: (string)fields.apellidos.stringValue,
+                    Nombres: (string)fields.nombres.stringValue,
+                    Cedula: (string)fields.cedula.stringValue,
+                    Telefono: (string)fields.telefono.stringValue,
+                    Correo: (string)fields.correo.stringValue,
+                    Status: (string)fields.status.stringValue,
+                    TipoVehiculo: (string)fields.tipoVehiculo.stringValue,
+                    PlacaVehicular: (string)fields.placaVehicular.stringValue,
+                    Usuario: (string)fields.usuario.stringValue,
+                    Contrasena: (string)fields.contrasena.stringValue,
+                    Activo: (string)fields.activo.stringValue,
+                    Imagen: (string)fields.imagen.stringValue,
                     Mensaje: ""
                 );
+
+                return (usuarioModel, docId);
             }
             catch
             {
-                return null;
+                return (null, "");
             }
         }
 
@@ -242,6 +260,55 @@ namespace ParkIsrael_Octavo.Services
             }
 
             return lista;
+        }
+
+        public async Task<bool> ActualizarUsuario(string documentId, UsuarioModel usuario)
+        {
+            try
+            {
+                string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/{collection}/{documentId}";
+                var data = new
+                {
+                    fields = new
+                    {
+                        id = new { integerValue = usuario.Id.ToString() },
+                        apellidos = new { stringValue = usuario.Apellidos },
+                        nombres = new { stringValue = usuario.Nombres },
+                        cedula = new { stringValue = usuario.Cedula },
+                        telefono = new { stringValue = usuario.Telefono },
+                        correo = new { stringValue = usuario.Correo },
+                        status = new { stringValue = usuario.Status },
+                        tipoVehiculo = new { stringValue = usuario.TipoVehiculo },
+                        placaVehicular = new { stringValue = usuario.PlacaVehicular },
+                        usuario = new { stringValue = usuario.Usuario },
+                        contrasena = new { stringValue = usuario.Contrasena },
+                        activo = new { stringValue = usuario.Activo },
+                        imagen = new { stringValue = usuario.Imagen }
+                    }
+                };
+                var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+                var response = await client.PatchAsync(url, content);
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> EliminarUsuario(string documentId)
+        {
+            try
+            {
+                string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/{collection}/{documentId}";
+                var response = await client.DeleteAsync(url);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error EliminarUsuario(): {ex.Message}");
+                return false;
+            }
         }
     }
 }

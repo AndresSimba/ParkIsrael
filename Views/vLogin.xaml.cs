@@ -34,7 +34,7 @@ public partial class vLogin : ContentPage
         //si el usuario es estudiante pasa a la View vAcceso y carga los datos del usuario
         if (login.status == "estudiante")
         {
-            UsuarioModel? datosUsuario = await service.ObtenerUsuarioPorNombreAsync(usuario);
+            var (datosUsuario, documentId) = await service.ObtenerUsuarioPorNombreAsync(usuario);
             if (datosUsuario is null)
             {
                 await DisplayAlert("Error", "No se pudo cargar la información del usuario", "OK");

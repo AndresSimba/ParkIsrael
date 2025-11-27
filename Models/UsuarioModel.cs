@@ -1,4 +1,10 @@
-﻿namespace ParkIsrael_Octavo.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ParkIsrael_Octavo.Models
 {
     public record UsuarioModel(
         int Id,// autoincremental

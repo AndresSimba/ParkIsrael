@@ -5,14 +5,23 @@
              Title="vInformacion">
     
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout
+            Spacing="15"
+            Padding="15">
+
+            <Image
+                Source="logo.png"
+                MaximumHeightRequest="250"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+            </Image>
 
             <Label
                 Text="LISTADO DE USUARIOS"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center"
                 FontAttributes="Bold"
-                FontSize="22"
+                FontSize="30"
                 TextColor="DarkOrange"/>
 
             <Grid>
@@ -91,7 +100,19 @@
                 </ListView.ItemTemplate>
             </ListView>
 
+            <Button
+                x:Name="btnRegistro"
+                Text="NUEVO REGISTRO"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="45"
+                Clicked="btnRegistro_Clicked">                
+            </Button>
 
+            <Image
+                Source="uisrael.jpg"
+                MaximumHeightRequest="55">
+            </Image>
 
         </VerticalStackLayout>
     </ScrollView>
