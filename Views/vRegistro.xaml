@@ -81,15 +81,22 @@
 
             <!-- IMAGEN -->
             <Label Text="IMAGEN DE PERFIL:" FontAttributes="Bold"/>
-            <Image
-                x:Name="imgPerfil"
-                HeightRequest="250"
-                WidthRequest="250"
-                Aspect="AspectFill"
-                BackgroundColor="#EEEEEE"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Margin="0,10,0,10"/>
+            <Frame
+    CornerRadius="125"
+    HeightRequest="250"
+    WidthRequest="250"
+    Padding="0"
+    HasShadow="True"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
+
+                <Image
+        x:Name="imgPerfil"
+        Aspect="AspectFill"
+        HeightRequest="250"
+        WidthRequest="250">
+                </Image>
+            </Frame>
 
             <Button
                 x:Name="btnFoto"
