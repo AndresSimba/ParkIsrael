@@ -81,20 +81,21 @@
 
             <!-- IMAGEN -->
             <Label Text="IMAGEN DE PERFIL:" FontAttributes="Bold"/>
+            
             <Frame
-    CornerRadius="125"
-    HeightRequest="250"
-    WidthRequest="250"
-    Padding="0"
-    HasShadow="True"
-    HorizontalOptions="Center"
-    VerticalOptions="Center">
+                CornerRadius="125"
+                HeightRequest="250"
+                WidthRequest="250"
+                Padding="0"
+                HasShadow="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
 
                 <Image
-        x:Name="imgPerfil"
-        Aspect="AspectFill"
-        HeightRequest="250"
-        WidthRequest="250">
+                    x:Name="imgPerfil"
+                    Aspect="AspectFill"
+                    HeightRequest="250"
+                    WidthRequest="250">
                 </Image>
             </Frame>
 
