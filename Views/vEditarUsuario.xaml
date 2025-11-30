@@ -37,6 +37,7 @@
             <Button
                 x:Name="btnCambImg"
                 Text="CAMBIAR FOTO"
+                FontSize="20"
                 FontAttributes="Bold"
                 CornerRadius="10"
                 HeightRequest="45"
@@ -132,6 +133,7 @@
             <Button
                 x:Name="btnActualizar"
                 Text="ACTUALIZAR"
+                FontSize="20"
                 FontAttributes="Bold"
                 CornerRadius="10"
                 HeightRequest="45"
@@ -142,6 +144,7 @@
             <Button
                 x:Name="btnEliminar"
                 Text="ELIMINAR"
+                FontSize="20"
                 FontAttributes="Bold"
                 CornerRadius="10"
                 HeightRequest="45"

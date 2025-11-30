@@ -83,16 +83,17 @@
             </Grid>
 
 
-            <Button x:Name="btnGenerarQR"
-                    Text="Generar QR"
-                    Clicked="btnGenerarQR_Clicked"            
-                    BackgroundColor="DarkOrange"
-                    TextColor="White"
-                    CornerRadius="10"
-                    FontAttributes="Bold"
-                    HeightRequest="45"
-                    Grid.Column="0"
-                    Grid.Row="1"/>
+            <Button
+                x:Name="btnGenerarQR"
+                Text="Generar QR"
+                FontSize="20"                            
+                BackgroundColor="DarkOrange"
+                TextColor="White"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                HeightRequest="45"
+                Clicked="btnGenerarQR_Clicked">                
+            </Button>
 
             <Label
                 Text="UBICAR SEDE"
@@ -117,6 +118,7 @@
                     Grid.Row="0" Grid.Column="0"
                     x:Name="btnSede_1"
                     Text="MATRIZ"
+                    FontSize="20"
                     BackgroundColor="DarkOrange"
                     FontAttributes="Bold"
                     HeightRequest="45"
@@ -129,6 +131,7 @@
                     Grid.Row="1" Grid.Column="0"
                     x:Name="btnSede_2"
                     Text="ESCUELA DE IDIOMAS"
+                    FontSize="20"
                     BackgroundColor="DarkOrange"
                     FontAttributes="Bold"
                     HeightRequest="45"
@@ -141,6 +144,7 @@
                     Grid.Row="2" Grid.Column="0"
                     x:Name="btnSede_3"
                     Text="ESCUELA DE POSGRADOS"
+                    FontSize="20"
                     BackgroundColor="DarkOrange"
                     FontAttributes="Bold"
                     HeightRequest="45"

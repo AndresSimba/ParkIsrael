@@ -6,4 +6,9 @@ public partial class vControl : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void btnScanner_Clicked(object sender, EventArgs e)
+    {
+		Navigation.PushAsync(new vScanner());
+    }
 }

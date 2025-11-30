@@ -19,6 +19,7 @@
             <Button
                 x:Name="btnAdmin"
                 Text="ADMINISTRACION"
+                FontSize="20"
                 FontAttributes="Bold"
                 CornerRadius="10"
                 HeightRequest="45"
@@ -28,10 +29,12 @@
             <Button
                 x:Name="Control"
                 Text="CONTROL"
+                FontSize="20"
                 FontAttributes="Bold"
                 CornerRadius="10"
                 HeightRequest="45"
-                Clicked="Control_Clicked"></Button>
+                Clicked="Control_Clicked">                
+            </Button>
             
             <Image
                 Source="uisrael.jpg"

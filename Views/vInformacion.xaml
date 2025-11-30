@@ -103,6 +103,7 @@
             <Button
                 x:Name="btnRegistro"
                 Text="NUEVO REGISTRO"
+                FontSize="20"
                 FontAttributes="Bold"
                 CornerRadius="10"
                 HeightRequest="45"

@@ -3,10 +3,162 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkIsrael_Octavo.Views.vControl"
              Title="vControl">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="25"
+            Spacing="30">
+
+            <Image
+                Source="logo.png"
+                MaximumHeightRequest="250"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+            </Image>
+
+            <Label Text="CONTROL DE PARQUEOS"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center">                
+            </Label>
+
+            <Grid
+                RowSpacing="10"
+                ColumnSpacing="10">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!--SEDE MATRIZ-->
+                <Label
+                    Grid.Row="0" Grid.Column="0"
+                    Text="SEDE MATRIZ"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">                    
+                </Label>
+
+                <Frame
+                    Grid.Row="1" Grid.Column="0"
+                    BackgroundColor="#2E86C1"
+                    CornerRadius="15"
+                    HasShadow="True"
+                    Padding="10"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+
+                    <Label
+                        x:Name="lblMatriz"
+                        Text="20"
+                        TextColor="WhiteSmoke"
+                        FontSize="45"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center">                        
+                    </Label>
+                </Frame>
+
+                <!--SEDE ESCUELA DE IDIOMAS-->
+                <Label
+                    Grid.Row="0" Grid.Column="1"
+                    Text="ESCUELA DE IDIOMAS"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">                    
+                </Label>
+
+                <Frame
+                    Grid.Row="1" Grid.Column="1"
+                    BackgroundColor="#27AE60"
+                    CornerRadius="15"
+                    HasShadow="True"
+                    Padding="10"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+
+                    <Label
+                        x:Name="lblIdiomas"
+                        Text="20"
+                        TextColor="WhiteSmoke"
+                        FontSize="45"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center">                        
+                    </Label>
+                </Frame>
+
+
+                <!--SEDE ESCUELA DE POSGRADOS-->
+                <Label
+                    Grid.Row="0" Grid.Column="2"
+                    Text="ESCUELA DE POSGRADOS"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">                    
+                </Label>
+
+                <Frame
+                    Grid.Row="1" Grid.Column="2"
+                    BackgroundColor="#D35400"
+                    CornerRadius="15"
+                    HasShadow="True"
+                    Padding="10"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+
+                    <Label
+                        x:Name="lblPosgrado"
+                        Text="20"
+                        TextColor="WhiteSmoke"
+                        FontSize="45"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center">                        
+                    </Label>
+                </Frame>
+
+            </Grid>
+            
+            <!-- SELECTOR DE SEDE -->
+            <Label Text="SELECCIONAR SEDE:" FontSize="20" FontAttributes="Bold"/>
+            <Picker
+                x:Name="pkSede"
+                FontSize="20">
+                <Picker.Items>
+                    <x:String>MATRIZ</x:String>
+                    <x:String>IDIOMAS</x:String>
+                    <x:String>POSGRADOS</x:String>
+                </Picker.Items>                
+            </Picker>
+            
+            <!-- ESCANEO QR -->
+            <Button
+                x:Name="btnScanner"
+                Text="ESCANEAR QR"
+                FontSize="20"
+                FontAttributes="Bold"
+                HeightRequest="45"
+                CornerRadius="10"
+                Clicked="btnScanner_Clicked">                
+            </Button>
+
+            <Image
+                Source="uisrael.jpg"
+                MaximumHeightRequest="55">
+            </Image>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

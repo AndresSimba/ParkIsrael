@@ -32,6 +32,7 @@
             <Button
                 x:Name="btnIngresar"
                 Text="INGRESAR"
+                FontSize="20"
                 TextColor="White"
                 BorderColor="Orange"
                 HeightRequest="45"
@@ -44,6 +45,7 @@
             <Button
                 x:Name="btnRegistro"
                 Text="REGISTRAR"
+                FontSize="20"
                 TextColor="White"
                 BackgroundColor="DarkOrange"
                 FontAttributes="Bold"
