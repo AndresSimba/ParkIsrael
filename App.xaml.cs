@@ -11,5 +11,10 @@
         {
             return new Window(new NavigationPage (new Views.vLogin()));
         }
+
+        protected override async void OnStart()
+        {
+            await Services.FirebaseInitService.InicializarBaseAsync();
+        }
     }
 }

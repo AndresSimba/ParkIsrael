@@ -57,4 +57,10 @@ public partial class vLogin : ContentPage
             Console.WriteLine($"Error al Regsitrar: {ex.Message}");
         }
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await FirebaseInitService.InicializarBaseAsync();
+    }
 }

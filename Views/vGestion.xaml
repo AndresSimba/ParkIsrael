@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ParkIsrael_Octavo.Views.vControl"
-             Title="vControl">
+             x:Class="ParkIsrael_Octavo.Views.vGestion"
+             Title="vGestion">
 
     <ScrollView>
         <VerticalStackLayout
@@ -16,16 +16,16 @@
                 HorizontalOptions="Center">
             </Image>
 
-            <Label Text="CONTROL DE PARQUEADEROS"
+            <!-- Título -->
+            <Label Text="ADMINISTRACION DE PARQUEADEROS"
                    FontSize="30"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center">                
-            </Label>
+                   HorizontalOptions="Center" />
 
             <Grid
                 RowSpacing="10"
                 ColumnSpacing="10">
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -37,10 +37,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <!--SEDE MATRIZ-->
+                <!-- SEDE MATRIZ -->
                 <Label
                     Grid.Row="0" Grid.Column="0"
-                    Text="SEDE MATRIZ"
+                    Text="SEDE MATRIZ (MÁX)"
                     FontAttributes="Bold"
                     FontSize="20"
                     HorizontalOptions="Center"
@@ -56,21 +56,21 @@
                     HorizontalOptions="Fill"
                     VerticalOptions="Center">
 
-                    <Label
-                        x:Name="lblMatriz"
+                    <Entry
+                        x:Name="txtMaxMatriz"
                         Text="20"
-                        TextColor="WhiteSmoke"
+                        Keyboard="Numeric"
                         FontSize="45"
-                        FontAttributes="Bold"
+                        TextColor="WhiteSmoke"
                         HorizontalTextAlignment="Center"
-                        VerticalTextAlignment="Center">                        
-                    </Label>
+                        BackgroundColor="Transparent">                        
+                    </Entry>
                 </Frame>
 
-                <!--SEDE ESCUELA DE IDIOMAS-->
+                <!-- SEDE IDIOMAS -->
                 <Label
                     Grid.Row="0" Grid.Column="1"
-                    Text="ESCUELA DE IDIOMAS"
+                    Text="ESCUELA DE IDIOMAS (MÁX)"
                     FontAttributes="Bold"
                     FontSize="20"
                     HorizontalOptions="Center"
@@ -86,22 +86,21 @@
                     HorizontalOptions="Fill"
                     VerticalOptions="Center">
 
-                    <Label
-                        x:Name="lblIdiomas"
+                    <Entry
+                        x:Name="txtMaxIdiomas"
                         Text="20"
-                        TextColor="WhiteSmoke"
+                        Keyboard="Numeric"
                         FontSize="45"
-                        FontAttributes="Bold"
+                        TextColor="WhiteSmoke"
                         HorizontalTextAlignment="Center"
-                        VerticalTextAlignment="Center">                        
-                    </Label>
+                        BackgroundColor="Transparent">                        
+                    </Entry>
                 </Frame>
 
-
-                <!--SEDE ESCUELA DE POSGRADOS-->
+                <!-- SEDE POSGRADOS -->
                 <Label
                     Grid.Row="0" Grid.Column="2"
-                    Text="ESCUELA DE POSGRADOS"
+                    Text="ESCUELA DE POSGRADOS (MÁX)"
                     FontAttributes="Bold"
                     FontSize="20"
                     HorizontalOptions="Center"
@@ -117,94 +116,60 @@
                     HorizontalOptions="Fill"
                     VerticalOptions="Center">
 
-                    <Label
-                        x:Name="lblPosgrado"
+                    <Entry
+                        x:Name="txtMaxPosgrados"
                         Text="20"
-                        TextColor="WhiteSmoke"
+                        Keyboard="Numeric"
                         FontSize="45"
-                        FontAttributes="Bold"
+                        TextColor="WhiteSmoke"
                         HorizontalTextAlignment="Center"
-                        VerticalTextAlignment="Center">                        
-                    </Label>
+                        BackgroundColor="Transparent">                        
+                    </Entry>
                 </Frame>
 
             </Grid>
-            
-            <!-- SELECTOR DE SEDE -->
-            <Label Text="SELECCIONAR SEDE:" FontSize="20" FontAttributes="Bold"/>
-            <Picker
-                x:Name="pkSede"
-                FontSize="20"
-                SelectedIndexChanged="pkSede_SelectedIndexChanged">
-                <Picker.Items>
-                    <x:String>MATRIZ</x:String>
-                    <x:String>IDIOMAS</x:String>
-                    <x:String>POSGRADOS</x:String>
-                </Picker.Items>                
-            </Picker>
 
-            <HorizontalStackLayout
-                Spacing="30"
-                HorizontalOptions="Center"
-                VerticalOptions="End"
-                Margin="0,0,0,40">
+            <Grid
+                RowSpacing="10"
+                ColumnSpacing="10">
 
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- BOTÓN GUARDAR -->
                 <Button
-                    x:Name="btnSalida"
-                    Text="SALIR"
-                    FontSize="20"
+                    Grid.Row="0" Grid.Column="0"
+                    x:Name="btnGuardarCupo"
+                    Text="GUARDAR CUPOS MAXIMOS"
+                    BackgroundColor="#2980B9"
+                    TextColor="White"
                     FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Clicked="btnGuardarCupo_Clicked">                    
+                </Button>
+
+                <!-- BOTÓN REINICIAR -->
+                <Button
+                    Grid.Row="0" Grid.Column="1"
+                    x:Name="btnReinCupo"
+                    Text="REINICIAR CUPOS ACTUALES"
                     BackgroundColor="#C0392B"
                     TextColor="White"
+                    FontAttributes="Bold"
                     CornerRadius="10"
-                    WidthRequest="140"
                     HeightRequest="50"
-                    IsEnabled="False"
-                    Clicked="btnSalida_Clicked">                    
+                    Clicked="btnReinCupo_Clicked">                    
                 </Button>
 
-                <Button
-                    x:Name="btnEntrada"
-                    Text="ENTRAR"
-                    FontSize="20"
-                    FontAttributes="Bold"
-                    BackgroundColor="#27AE60"
-                    TextColor="White"
-                    CornerRadius="10"
-                    WidthRequest="140"
-                    HeightRequest="50"
-                    IsEnabled="False"
-                    Clicked="btnEntrada_Clicked">                    
-                </Button>
+            </Grid>
 
-            </HorizontalStackLayout>
-
-            <VerticalStackLayout
-                Padding="15"
-                Spacing="15">
-                
-                <Button
-                    x:Name="btnReiniciar"
-                    Text="REINICIAR"
-                    FontAttributes="Bold"
-                    FontSize="20"
-                    CornerRadius="10"
-                    HeightRequest="45"
-                    Clicked="btnReiniciar_Clicked">                    
-                </Button>
-
-                <Button
-                    x:Name="btnPantalla"
-                    Text="MOSTRAR PANTALLA"
-                    FontSize="20"
-                    FontAttributes="Bold"
-                    CornerRadius="10"
-                    HeightRequest="45"
-                    Clicked="btnPantalla_Clicked">                    
-                </Button>
-
-            </VerticalStackLayout>
-            
             <Image
                 Source="uisrael.jpg"
                 MaximumHeightRequest="55">

@@ -27,15 +27,25 @@
             </Button>
             
             <Button
-                x:Name="Control"
+                x:Name="btnControl"
                 Text="CONTROL"
                 FontSize="20"
                 FontAttributes="Bold"
                 CornerRadius="10"
                 HeightRequest="45"
-                Clicked="Control_Clicked">                
+                Clicked="btnControl_Clicked">                
             </Button>
-            
+
+            <Button
+                x:Name="btnGestion"
+                Text="GESTION"
+                FontSize="20"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="45"
+                Clicked="btnGestion_Clicked">
+            </Button>
+
             <Image
                 Source="uisrael.jpg"
                 MaximumHeightRequest="55">

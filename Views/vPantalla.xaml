@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ParkIsrael_Octavo.Views.vPantalla"
+             Title="vPantalla">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="15"
+            Spacing="15"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <Label x:Name="lblTitulo"
+                   Text="SEDE"
+                   FontSize="50"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Center">                
+            </Label>
+
+            <Frame x:Name="frmContenedor"
+                   BackgroundColor="Gray"
+                   CornerRadius="30"
+                   Padding="30"
+                   HorizontalOptions="Center"
+                   WidthRequest="350"
+                   HeightRequest="350">
+
+                <Label x:Name="lblCupos"
+                       Text="0"
+                       TextColor="White"
+                       FontSize="175"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center">
+                </Label>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

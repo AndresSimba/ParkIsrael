@@ -12,8 +12,13 @@ public partial class vAdmin : ContentPage
         Navigation.PushAsync (new vInformacion());
     }
 
-    private void Control_Clicked(object sender, EventArgs e)
+    private void btnControl_Clicked(object sender, EventArgs e)
     {
         Navigation.PushAsync(new vControl());
+    }
+
+    private void btnGestion_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new vGestion());
     }
 }
