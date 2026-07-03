@@ -1,14 +1,17 @@
 using QRCoder;
 using ParkIsrael_Octavo.Models;
+
 namespace ParkIsrael_Octavo.Views;
 
 public partial class vQR : ContentPage
 {
     private UsuarioModel Usuario; // Recibimos datos
-    public vQR(UsuarioModel usuario)
+    private string DocumentId;
+    public vQR(UsuarioModel usuario, string documentId)
 	{
 		InitializeComponent();
         Usuario = usuario;
+        DocumentId = documentId;
         GenerarQR();
     }
 
@@ -17,19 +20,10 @@ public partial class vQR : ContentPage
         try
         {
             // Construimos un texto con todos los datos del usuario
-            string contenidoQR =
-                $"Nombres: {Usuario.Nombres}\n" +
-                $"Apellidos: {Usuario.Apellidos}\n" +
-                $"Cédula: {Usuario.Cedula}\n" +
-                $"Teléfono: {Usuario.Telefono}\n" +
-                $"Correo: {Usuario.Correo}\n" +
-                $"Status: {Usuario.Status}\n" +
-                $"Estado: {Usuario.Activo}\n" +
-                $"Tipo Vehículo: {Usuario.TipoVehiculo}\n" +
-                $"Placa: {Usuario.PlacaVehicular}";
+            string contenidoQR = DocumentId;
 
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(contenidoQR, QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(contenidoQR, QRCodeGenerator.ECCLevel.H);
             PngByteQRCode qrCode = new PngByteQRCode(qrCodeData);
             byte[] qrBytes = qrCode.GetGraphic(20);
 

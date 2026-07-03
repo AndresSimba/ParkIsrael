@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="ParkIsrael_Octavo.Views.vEscanearQR"
+             Title="vEscanearQR">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <Label
+                Text="Escáner QR"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center">                
+            </Label>
+
+            <zxing:CameraBarcodeReaderView
+                x:Name="cameraQR"
+                HeightRequest="350"
+                HorizontalOptions="Fill"
+                BarcodesDetected="cameraQR_BarcodesDetected">                
+            </zxing:CameraBarcodeReaderView>
+
+            <Frame
+                Padding="15"
+                CornerRadius="15"
+                BackgroundColor="#F2F2F2">
+
+                <VerticalStackLayout
+                    Spacing="15">
+
+                    <Image
+                        x:Name="imgPerfil"
+                        HeightRequest="150"
+                        WidthRequest="150"
+                        Aspect="AspectFill"
+                        HorizontalOptions="Center"
+                        IsVisible="False">                        
+                    </Image>
+
+                    <Label
+                        x:Name="lblResultado"
+                        Text="Esperando escaneo..."
+                        FontSize="16"
+                        TextColor="Black">                        
+                    </Label>
+
+                    <HorizontalStackLayout
+                        Spacing="15"
+                        HorizontalOptions="Center">
+
+                        <Button
+                            x:Name="btnSalir"
+                            Text="SALIR"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            BackgroundColor="#C0392B"
+                            TextColor="White"
+                            CornerRadius="10"
+                            WidthRequest="140"
+                            HeightRequest="50"
+                            IsEnabled="False"
+                            Clicked="btnSalir_Clicked">
+                        </Button>
+                        
+                        <Button
+                            x:Name="btnEntrar"
+                            Text="ENTRAR"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            BackgroundColor="#27AE60"
+                            TextColor="White"
+                            CornerRadius="10"
+                            WidthRequest="140"
+                            HeightRequest="50"
+                            IsEnabled="False"
+                            Clicked="btnEntrar_Clicked">                            
+                        </Button>                        
+
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+                
+            </Frame>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -13,7 +13,6 @@ namespace ParkIsrael_Octavo.Views
             btnSalida.IsEnabled = false;
             btnEntrada.Opacity = 0.4;
             btnSalida.Opacity = 0.4;
-
             pkSede.SelectedIndexChanged += pkSede_SelectedIndexChanged;
         }
 
@@ -29,17 +28,13 @@ namespace ParkIsrael_Octavo.Views
         private async void btnEntrada_Clicked(object sender, EventArgs e)
         {
             if (pkSede.SelectedIndex == -1) return;
-
             string sede = pkSede.SelectedItem.ToString().ToLower();
-
             bool ok = await FirebaseServiceCupos.ReducirAsync(sede);
-
             if (!ok)
             {
                 await DisplayAlert("Lleno", "No hay más espacios disponibles.", "OK");
                 return;
             }
-
             await ActualizarUIFirebase();
         }
 
@@ -49,17 +44,13 @@ namespace ParkIsrael_Octavo.Views
         private async void btnSalida_Clicked(object sender, EventArgs e)
         {
             if (pkSede.SelectedIndex == -1) return;
-
             string sede = pkSede.SelectedItem.ToString().ToLower();
-
             bool ok = await FirebaseServiceCupos.AumentarAsync(sede);
-
             if (!ok)
             {
                 await DisplayAlert("Vacío", "Todos los espacios ya están libres.", "OK");
                 return;
             }
-
             await ActualizarUIFirebase();
         }
 
@@ -69,10 +60,8 @@ namespace ParkIsrael_Octavo.Views
         private void pkSede_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool haySede = pkSede.SelectedIndex != -1;
-
             btnEntrada.IsEnabled = haySede;
             btnSalida.IsEnabled = haySede;
-
             btnEntrada.Opacity = haySede ? 1 : 0.4;
             btnSalida.Opacity = haySede ? 1 : 0.4;
         }
@@ -88,10 +77,8 @@ namespace ParkIsrael_Octavo.Views
                 "Sí", "No");
 
             if (!confirmar) return;
-
             await FirebaseServiceCupos.ReiniciarCuposAsync();
             await ActualizarUIFirebase();
-
             await DisplayAlert("OK", "Cupos reiniciados correctamente", "Aceptar");
         }
 
@@ -101,12 +88,9 @@ namespace ParkIsrael_Octavo.Views
         private async Task AnimarLabel(Label label, bool aumento)
         {
             var colorOriginal = label.TextColor;
-
             label.TextColor = aumento ? Colors.LawnGreen : Colors.IndianRed;
-
             await label.ScaleTo(1.3, 150, Easing.CubicIn);
             await label.ScaleTo(1.0, 150, Easing.CubicOut);
-
             label.TextColor = colorOriginal;
         }
 
@@ -118,7 +102,6 @@ namespace ParkIsrael_Octavo.Views
             var (m, maxM) = await FirebaseServiceCupos.ObtenerCuposAsync("matriz");
             var (i, maxI) = await FirebaseServiceCupos.ObtenerCuposAsync("idiomas");
             var (p, maxP) = await FirebaseServiceCupos.ObtenerCuposAsync("posgrados");
-
             lblMatriz.Text = m.ToString();
             lblIdiomas.Text = i.ToString();
             lblPosgrado.Text = p.ToString();
@@ -139,7 +122,6 @@ namespace ParkIsrael_Octavo.Views
                 await DisplayAlert("Aviso", "Seleccione una sede primero.", "OK");
                 return;
             }
-
             string sede = pkSede.SelectedItem.ToString().ToLower();
             await Navigation.PushAsync(new vPantalla(sede));
         }
@@ -150,13 +132,25 @@ namespace ParkIsrael_Octavo.Views
         private void ActualizarColor(Label label, CupoItem item)
         {
             double porcentaje = (double)item.cupos / item.max;
-
             if (porcentaje > 0.5)
                 label.TextColor = Colors.LawnGreen;    // Verde
             else if (porcentaje > 0.2)
                 label.TextColor = Colors.Gold;        // Amarillo
             else
                 label.TextColor = Colors.IndianRed;   // Rojo
+        }
+
+        private async void btnEscanearQR_Clicked(object sender, EventArgs e)
+        {
+            if (pkSede.SelectedIndex == -1)
+            {
+                await DisplayAlert("Aviso", "Seleccione una sede primero.", "OK");
+                return;
+            }
+
+            string sede = pkSede.SelectedItem.ToString().ToLower();
+
+            await Navigation.PushAsync(new vEscanearQR(sede));
         }
     }
 

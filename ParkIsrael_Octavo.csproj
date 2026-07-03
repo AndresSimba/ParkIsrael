@@ -61,10 +61,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.7" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="QRCoder" Version="1.7.0" />
+		<PackageReference Include="QRCoder" Version="1.8.0" />
 		<PackageReference Include="ZXing.Net.Maui" Version="0.6.0" />
+		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.6.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -77,7 +78,13 @@
 	  <MauiXaml Update="Views\vControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\vEditarPerfil.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\vEditarUsuario.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\vEscanearQR.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\vGestion.xaml">

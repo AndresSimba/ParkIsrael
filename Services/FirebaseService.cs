@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ParkIsrael_Octavo.Models;
-using System;
-using System.Buffers.Text;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 
 namespace ParkIsrael_Octavo.Services
@@ -28,7 +24,6 @@ namespace ParkIsrael_Octavo.Services
                 int lastId = int.Parse((string)data.fields.lastId.integerValue);
                 int newId = lastId + 1;
 
-                // Actualizar el contador en Firestore
                 var updateData = new
                 {
                     fields = new
@@ -46,7 +41,7 @@ namespace ParkIsrael_Octavo.Services
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error ObtenerNuevoIdAsync(): {ex.Message}");
-                return -1; // señal de error
+                return -1;
             }
         }
 
@@ -55,12 +50,10 @@ namespace ParkIsrael_Octavo.Services
         {
             try
             {
-                // 1. Obtener ID autoincremental
                 int nuevoId = await ObtenerNuevoIdAsync();
                 if (nuevoId == -1)
                     return false;
 
-                // 2. Crear el documento con TODOS los campos
                 var document = new
                 {
                     fields = new
@@ -71,13 +64,13 @@ namespace ParkIsrael_Octavo.Services
                         cedula = new { stringValue = cedula },
                         telefono = new { stringValue = telefono },
                         correo = new { stringValue = correo },
-                        status = new { stringValue = status }, // administrador o estudiante
+                        status = new { stringValue = status },
                         tipoVehiculo = new { stringValue = tipoVehiculo },
                         placaVehicular = new { stringValue = placaVehicular },
                         usuario = new { stringValue = usuario },
                         contrasena = new { stringValue = contrasena },
-                        activo = new { stringValue = "Si" }, // Por defecto "Si"
-                        imagen = new { stringValue = imagenBase64 } // foto base64
+                        activo = new { stringValue = "Si" },
+                        imagen = new { stringValue = imagenBase64 }
                     }
                 };
                 var json = JsonConvert.SerializeObject(document);
@@ -132,7 +125,6 @@ namespace ParkIsrael_Octavo.Services
 
                 dynamic data = JsonConvert.DeserializeObject(responseText);
 
-                // 🔥 Validación correcta: Firestore muchas veces devuelve [{}] cuando NO encuentra nada
                 if (data == null || data.Count == 0 || data[0].document == null)
                     return (false, "", "Usuario no encontrado");
 
@@ -183,30 +175,38 @@ namespace ParkIsrael_Octavo.Services
                     return (null, "");
 
                 dynamic data = JsonConvert.DeserializeObject(responseText);
-
-                // 🔥 validación correcta
                 if (data == null || data.Count == 0 || data[0].document == null)
                     return (null, "");
 
                 var doc = data[0].document;
+                var f = doc.fields;
+
+                string Safe(dynamic obj, string def = "")
+                {
+                    return obj != null ? (string)obj.stringValue : def;
+                }
+
+                string SafeInt(dynamic obj)
+                {
+                    return obj != null ? (string)obj.integerValue : "0";
+                }
+
                 string docId = ((string)doc.name).Split('/').Last();
 
-                var fields = doc.fields;
-
                 var usuarioModel = new UsuarioModel(
-                    Id: int.Parse((string)fields.id.integerValue),
-                    Apellidos: (string)fields.apellidos.stringValue,
-                    Nombres: (string)fields.nombres.stringValue,
-                    Cedula: (string)fields.cedula.stringValue,
-                    Telefono: (string)fields.telefono.stringValue,
-                    Correo: (string)fields.correo.stringValue,
-                    Status: (string)fields.status.stringValue,
-                    TipoVehiculo: (string)fields.tipoVehiculo.stringValue,
-                    PlacaVehicular: (string)fields.placaVehicular.stringValue,
-                    Usuario: (string)fields.usuario.stringValue,
-                    Contrasena: (string)fields.contrasena.stringValue,
-                    Activo: (string)fields.activo.stringValue,
-                    Imagen: (string)fields.imagen.stringValue,
+                    Id: int.Parse(SafeInt(f.id)),
+                    Apellidos: Safe(f.apellidos),
+                    Nombres: Safe(f.nombres),
+                    Cedula: Safe(f.cedula),
+                    Telefono: Safe(f.telefono),
+                    Correo: Safe(f.correo),
+                    Status: Safe(f.status),
+                    TipoVehiculo: Safe(f.tipoVehiculo),
+                    PlacaVehicular: Safe(f.placaVehicular),
+                    Usuario: Safe(f.usuario),
+                    Contrasena: Safe(f.contrasena),
+                    Activo: Safe(f.activo),
+                    Imagen: Safe(f.imagen),
                     Mensaje: ""
                 );
 
@@ -221,38 +221,87 @@ namespace ParkIsrael_Octavo.Services
         public async Task<List<UsuarioModel>> ObtenerUsuariosAsync()
         {
             List<UsuarioModel> lista = new();
+
             try
             {
-                string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/{collection}";
-                var response = await client.GetAsync(url);
-                var json = await response.Content.ReadAsStringAsync();
+                string? pageToken = null;
 
-                if (!response.IsSuccessStatusCode)
-                    return lista;
-
-                dynamic data = JsonConvert.DeserializeObject(json);
-
-                foreach (var item in data.documents)
+                do
                 {
-                    var f = item.fields;
+                    string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/{collection}?pageSize=100";
+                    if (!string.IsNullOrEmpty(pageToken))
+                        url += $"&pageToken={pageToken}";
+                    var response = await client.GetAsync(url);
+                    var json = await response.Content.ReadAsStringAsync();
+                    if (!response.IsSuccessStatusCode)
+                        return lista;
+                    dynamic data = JsonConvert.DeserializeObject(json);
+                    if (data == null || data.documents == null)
+                        return lista;
+                    string Safe(dynamic obj, string def = "")
+                    {
+                        try
+                        {
+                            return obj != null ? (string)obj.stringValue : def;
+                        }
+                        catch
+                        {
+                            return def;
+                        }
+                    }
 
-                    lista.Add(new UsuarioModel(
-                        Id: int.Parse((string)f.id.integerValue),
-                        Apellidos: (string)f.apellidos.stringValue,
-                        Nombres: (string)f.nombres.stringValue,
-                        Cedula: (string)f.cedula.stringValue,
-                        Telefono: (string)f.telefono.stringValue,
-                        Correo: (string)f.correo.stringValue,
-                        Status: (string)f.status.stringValue,
-                        TipoVehiculo: (string)f.tipoVehiculo.stringValue,
-                        PlacaVehicular: (string)f.placaVehicular.stringValue,
-                        Usuario: (string)f.usuario.stringValue,
-                        Contrasena: (string)f.contrasena.stringValue,
-                        Activo: (string)f.activo.stringValue,
-                        Imagen: (string)f.imagen.stringValue,
-                        Mensaje: ""
-                    ));
-                }
+                    int SafeInt(dynamic obj)
+                    {
+                        try
+                        {
+                            return obj != null ? int.Parse((string)obj.integerValue) : 0;
+                        }
+                        catch
+                        {
+                            return 0;
+                        }
+                    }
+
+                    foreach (var item in data.documents)
+                    {
+                        try
+                        {
+                            if (item.fields == null)
+                                continue;
+                            var f = item.fields;
+                            lista.Add(new UsuarioModel(
+                                Id: SafeInt(f.id),
+                                Apellidos: Safe(f.apellidos),
+                                Nombres: Safe(f.nombres),
+                                Cedula: Safe(f.cedula),
+                                Telefono: Safe(f.telefono),
+                                Correo: Safe(f.correo),
+                                Status: Safe(f.status),
+                                TipoVehiculo: Safe(f.tipoVehiculo),
+                                PlacaVehicular: Safe(f.placaVehicular),
+                                Usuario: Safe(f.usuario),
+                                Contrasena: Safe(f.contrasena),
+                                Activo: Safe(f.activo),
+                                Imagen: Safe(f.imagen),
+                                Mensaje: ""
+                            ));
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Documento omitido: {ex.Message}");
+                        }
+                    }
+
+                    try
+                    {
+                        pageToken = data.nextPageToken != null ? (string)data.nextPageToken : null;
+                    }
+                    catch
+                    {
+                        pageToken = null;
+                    }
+
+                } while (!string.IsNullOrEmpty(pageToken));
             }
             catch (Exception ex)
             {
@@ -267,6 +316,7 @@ namespace ParkIsrael_Octavo.Services
             try
             {
                 string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/{collection}/{documentId}";
+
                 var data = new
                 {
                     fields = new
@@ -286,12 +336,19 @@ namespace ParkIsrael_Octavo.Services
                         imagen = new { stringValue = usuario.Imagen }
                     }
                 };
-                var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+                var content = new StringContent(
+                    JsonConvert.SerializeObject(data),
+                    Encoding.UTF8,
+                    "application/json");
+
                 var response = await client.PatchAsync(url, content);
+
                 return response.IsSuccessStatusCode;
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Error ActualizarUsuario(): {ex.Message}");
                 return false;
             }
         }
@@ -307,6 +364,94 @@ namespace ParkIsrael_Octavo.Services
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error EliminarUsuario(): {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<UsuarioModel?> ObtenerUsuarioPorDocumentIdAsync(string documentId)
+        {
+            try
+            {
+                string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/{collection}/{documentId}";
+
+                var response = await client.GetAsync(url);
+                var responseText = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                    return null;
+
+                dynamic doc = JsonConvert.DeserializeObject(responseText);
+                var f = doc.fields;
+
+                string Safe(dynamic obj, string def = "")
+                {
+                    return obj != null ? (string)obj.stringValue : def;
+                }
+
+                string SafeInt(dynamic obj)
+                {
+                    return obj != null ? (string)obj.integerValue : "0";
+                }
+
+                var usuarioModel = new UsuarioModel(
+                    Id: int.Parse(SafeInt(f.id)),
+                    Apellidos: Safe(f.apellidos),
+                    Nombres: Safe(f.nombres),
+                    Cedula: Safe(f.cedula),
+                    Telefono: Safe(f.telefono),
+                    Correo: Safe(f.correo),
+                    Status: Safe(f.status),
+                    TipoVehiculo: Safe(f.tipoVehiculo),
+                    PlacaVehicular: Safe(f.placaVehicular),
+                    Usuario: Safe(f.usuario),
+                    Contrasena: Safe(f.contrasena),
+                    Activo: Safe(f.activo),
+                    Imagen: Safe(f.imagen),
+                    Mensaje: ""
+                );
+
+                return usuarioModel;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error ObtenerUsuarioPorDocumentIdAsync(): {ex.Message}");
+                return null;
+            }
+        }
+
+        public async Task<bool> ExisteCedulaAsync(string cedula)
+        {
+            try
+            {
+                string url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents:runQuery";
+                var query = new
+                {
+                    structuredQuery = new
+                    {
+                        from = new[] { new { collectionId = "usuarios" } },
+                        where = new
+                        {
+                            fieldFilter = new
+                            {
+                                field = new { fieldPath = "cedula" },
+                                op = "EQUAL",
+                                value = new { stringValue = cedula }
+                            }
+                        }
+                    }
+                };
+
+                var json = JsonConvert.SerializeObject(query);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, content);
+                var responseText = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                    return false;
+                dynamic data = JsonConvert.DeserializeObject(responseText);
+                return data != null && data.Count > 0 && data[0].document != null;
+            }
+            catch
+            {
                 return false;
             }
         }

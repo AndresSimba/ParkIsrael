@@ -204,6 +204,23 @@ public partial class vRegistro : ContentPage
 
     private async void btnGuardar_Clicked(object sender, EventArgs e)
     {
+        string cedula = txtCedula.Text?.Trim() ?? "";
+
+        if (string.IsNullOrWhiteSpace(cedula))
+        {
+            await DisplayAlert("Aviso", "Debe ingresar la cédula.", "OK");
+            return;
+        }
+
+        // Validar si la cédula ya existe en Firestore
+        bool existeCedula = await firestore.ExisteCedulaAsync(cedula);
+
+        if (existeCedula)
+        {
+            await DisplayAlert("Aviso", "Ya existe un usuario registrado con esta cédula.", "OK");
+            return;
+        }
+
         var model = new UsuarioModel(
             Id: 0,
             Apellidos: txtApellidos.Text,

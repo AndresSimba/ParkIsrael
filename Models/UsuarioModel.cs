@@ -20,6 +20,6 @@ namespace ParkIsrael_Octavo.Models
         string Contrasena,
         string Activo,// "Si"
         string Imagen,// Base64
-        string Mensaje// Respuesta del servidor
+        string Mensaje = ""// Respuesta del servidor
     );
 }

@@ -95,6 +95,18 @@
                 Clicked="btnGenerarQR_Clicked">                
             </Button>
 
+            <Button
+                x:Name="btnPerfil"
+                Text="EDITAR MI PERFIL"
+                FontSize="20"                            
+                BackgroundColor="DarkOrange"
+                TextColor="White"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                HeightRequest="45"
+                Clicked="btnPerfil_Clicked">
+            </Button>
+
             <Label
                 Text="UBICAR SEDE"
                 FontAttributes="Bold"

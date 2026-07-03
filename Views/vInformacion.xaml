@@ -24,81 +24,201 @@
                 FontSize="30"
                 TextColor="DarkOrange"/>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            <!-- Panel de búsqueda -->
+            <Frame
+                Padding="15"
+                CornerRadius="12"
+                BackgroundColor="#F8F9FA"
+                BorderColor="#D6D6D6">
 
-                <Label Grid.Column="0" Text="Id" FontAttributes="Bold"/>
-                <Label Grid.Column="1" Text="Apellidos" FontAttributes="Bold"/>
-                <Label Grid.Column="2" Text="Nombres" FontAttributes="Bold"/>
-                <Label Grid.Column="3" Text="Cedula" FontAttributes="Bold"/>
-                <Label Grid.Column="4" Text="Telefono" FontAttributes="Bold"/>
-                <Label Grid.Column="5" Text="Correo" FontAttributes="Bold"/>
-                <Label Grid.Column="6" Text="Status" FontAttributes="Bold"/>
-                <Label Grid.Column="7" Text="T. Vehiculo" FontAttributes="Bold"/>
-                <Label Grid.Column="8" Text="Placa" FontAttributes="Bold"/>
-                <Label Grid.Column="9" Text="Usuario" FontAttributes="Bold"/>
-                <Label Grid.Column="10" Text="Contraseña" FontAttributes="Bold"/>
-                <Label Grid.Column="11" Text="Activo" FontAttributes="Bold"/>
+                <Grid
+                    ColumnDefinitions="*,Auto"
+                    ColumnSpacing="30">
+                    
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        Spacing="10">
 
-            </Grid>
+                        <Label
+                            Text="Buscar por:"
+                            FontAttributes="Bold"
+                            TextColor="Black">                            
+                        </Label>
 
-            <ListView x:Name="lvUsuarios"
-                      ItemSelected="lvUsuarios_ItemSelected"
-                      HasUnevenRows="True"
-                      SeparatorVisibility="Default">
+                        <Grid
+                            ColumnDefinitions="180,*"
+                            ColumnSpacing="15">
+                            
+                            <Picker
+                                x:Name="pkTipoBusqueda"
+                                Grid.Column="0"
+                                SelectedIndexChanged="pkTipoBusqueda_SelectedIndexChanged">
+                                <Picker.Items>
+                                    <x:String>Apellido</x:String>
+                                    <x:String>Cédula</x:String>
+                                    <x:String>Placa</x:String>
+                                </Picker.Items>
+                            </Picker>
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="5">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                            <Entry
+                                x:Name="txtBuscar"
+                                Grid.Column="1"
+                                Placeholder="Ingrese el texto a buscar..."
+                                TextChanged="txtBuscar_TextChanged">
+                                                               
+                            </Entry>
+                        </Grid>
 
-                                    <Label Grid.Column="0" Text="{Binding Id}" />
-                                    <Label Grid.Column="1" Text="{Binding Apellidos}" />
-                                    <Label Grid.Column="2" Text="{Binding Nombres}" />
-                                    <Label Grid.Column="3" Text="{Binding Cedula}" />
-                                    <Label Grid.Column="4" Text="{Binding Telefono}" />
-                                    <Label Grid.Column="5" Text="{Binding Correo}" />
-                                    <Label Grid.Column="6" Text="{Binding Status}" />
-                                    <Label Grid.Column="7" Text="{Binding TipoVehiculo}" />
-                                    <Label Grid.Column="8" Text="{Binding PlacaVehicular}" />
-                                    <Label Grid.Column="9" Text="{Binding Usuario}" />
-                                    <Label Grid.Column="10" Text="{Binding Contrasena}" />
-                                    <Label Grid.Column="11" Text="{Binding Activo}" />
+                        <HorizontalStackLayout
+                            Spacing="10">
 
-                                </Grid>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                            <Button
+                                x:Name="btnLimpiar"
+                                Text="LIMPIAR"
+                                FontAttributes="Bold"
+                                BackgroundColor="White"
+                                BorderColor="#8E98A1"
+                                BorderWidth="1"
+                                TextColor="#333333"
+                                WidthRequest="120"
+                                HeightRequest="50"
+                                CornerRadius="12"
+                                Clicked="btnLimpiar_Clicked">                                
+                            </Button>
+
+                            <Button
+                                x:Name="btnRecargar"
+                                Text="REFRESH"
+                                FontAttributes="Bold"
+                                BackgroundColor="#27AE60"
+                                BorderColor="#27AE60"
+                                BorderWidth="1"
+                                TextColor="White"
+                                WidthRequest="120"
+                                HeightRequest="50"
+                                CornerRadius="12"
+                                Clicked="btnRecargar_Clicked">
+                            </Button>
+                        
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        Spacing="10"
+                        WidthRequest="380">
+
+                        <Label
+                            x:Name="lblEstado"
+                            Text="Estado:"
+                            FontAttributes="Bold"
+                            TextColor="Black">                            
+                        </Label>
+                        
+                        <HorizontalStackLayout
+                            Spacing="15">
+
+                            <Button
+                                x:Name="btnTodos"
+                                Text="TODOS"
+                                FontAttributes="Bold"
+                                WidthRequest="110"
+                                BackgroundColor="#4B2EDB"
+                                TextColor="White"
+                                Clicked="btnTodos_Clicked">
+                            </Button>
+
+                            <Button
+                                x:Name="btnActivos"
+                                Text="ACTIVOS"
+                                FontAttributes="Bold"
+                                WidthRequest="110"
+                                BackgroundColor="White"
+                                BorderColor="#27AE60"
+                                BorderWidth="1"
+                                TextColor="#27AE60"
+                                Clicked="btnActivos_Clicked">                                
+                            </Button>
+
+                            <Button
+                                x:Name="btnInactivos"
+                                Text="INACTIVOS"
+                                FontAttributes="Bold"
+                                WidthRequest="120"
+                                BackgroundColor="White"
+                                BorderColor="#E74C3C"
+                                BorderWidth="1"
+                                TextColor="#E74C3C"
+                                Clicked="btnInactivos_Clicked">                                
+                            </Button>
+
+                        </HorizontalStackLayout>
+                        
+                        <Label
+                            x:Name="lblTotal"
+                            Text="Total: 0 usuarios"
+                            FontAttributes="Bold"
+                            TextColor="#4B2EDB"
+                            HorizontalOptions="Center">
+                        </Label>
+                        
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Encabezado de tabla -->
+            <Frame
+                Padding="0"
+                CornerRadius="10"
+                BorderColor="#D6D6D6"
+                HasShadow="True"
+                BackgroundColor="White">
+
+                <VerticalStackLayout
+                    Spacing="0">
+
+                    <Grid
+                        Padding="10"
+                        BackgroundColor="#4B2EDB"
+                        ColumnDefinitions="1.4*,1.4*,1.1*,1*,1*,1*,0.8*">
+
+                        <Label Grid.Column="0" Text="APELLIDOS" TextColor="White" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="NOMBRES" TextColor="White" FontAttributes="Bold" />
+                        <Label Grid.Column="2" Text="CÉDULA" TextColor="White" FontAttributes="Bold" />
+                        <Label Grid.Column="3" Text="STATUS" TextColor="White" FontAttributes="Bold" />
+                        <Label Grid.Column="4" Text="T. VEHÍCULO" TextColor="White" FontAttributes="Bold" />
+                        <Label Grid.Column="5" Text="PLACA" TextColor="White" FontAttributes="Bold" />
+                        <Label Grid.Column="6" Text="ACTIVO" TextColor="White" FontAttributes="Bold" />
+                    </Grid>
+
+                    <ListView
+                        x:Name="lvUsuarios"
+                        ItemSelected="lvUsuarios_ItemSelected"
+                        HasUnevenRows="True"
+                        SeparatorVisibility="Default">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid
+                                        Padding="10"
+                                        ColumnDefinitions="1.4*,1.4*,1.1*,1*,1*,1*,0.8*">
+
+                                        <Label Grid.Column="0" Text="{Binding Apellidos}" FontAttributes="Bold" VerticalTextAlignment="Center" />
+                                        <Label Grid.Column="1" Text="{Binding Nombres}" VerticalTextAlignment="Center" />
+                                        <Label Grid.Column="2" Text="{Binding Cedula}" VerticalTextAlignment="Center" />
+                                        <Label Grid.Column="3" Text="{Binding Status}" VerticalTextAlignment="Center" />
+                                        <Label Grid.Column="4" Text="{Binding TipoVehiculo}" VerticalTextAlignment="Center" />
+                                        <Label Grid.Column="5" Text="{Binding PlacaVehicular}" FontAttributes="Bold" VerticalTextAlignment="Center" />
+                                        <Label Grid.Column="6" Text="{Binding Activo}" FontAttributes="Bold" VerticalTextAlignment="Center" />
+
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </VerticalStackLayout>
+            </Frame>
 
             <Button
                 x:Name="btnRegistro"

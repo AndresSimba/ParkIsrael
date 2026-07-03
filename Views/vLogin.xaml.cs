@@ -40,7 +40,7 @@ public partial class vLogin : ContentPage
                 await DisplayAlert("Error", "No se pudo cargar la información del usuario", "OK");
                 return;
             }
-            await Navigation.PushAsync(new vAcceso(datosUsuario));
+            await Navigation.PushAsync(new vAcceso(datosUsuario, documentId));
             return;
         }
         await DisplayAlert("Error", "Status desconocido en la base", "OK");

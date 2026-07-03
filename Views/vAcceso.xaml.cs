@@ -5,10 +5,12 @@ namespace ParkIsrael_Octavo.Views;
 public partial class vAcceso : ContentPage
 {
     private UsuarioModel Usuario; // Guardamos los datos
-    public vAcceso(UsuarioModel usuario)
+    private string DocumentId;
+    public vAcceso(UsuarioModel usuario, string documentId)
     {
         InitializeComponent();
         Usuario = usuario;
+        DocumentId = documentId;
         CargarDatos();
     }
         private void CargarDatos()
@@ -69,9 +71,9 @@ public partial class vAcceso : ContentPage
         }
     }
 
-    private void btnGenerarQR_Clicked(object sender, EventArgs e)
+    private async void btnGenerarQR_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new vQR(Usuario));
+        await Navigation.PushAsync(new vQR(Usuario, DocumentId));
     }
 
     private async void btnSede_1_Clicked(object sender, EventArgs e)
@@ -87,5 +89,10 @@ public partial class vAcceso : ContentPage
     private async void btnSede_3_Clicked(object sender, EventArgs e)
     {
         await AbrirGoogleMaps(sede3);
+    }
+
+    private async void btnPerfil_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new vEditarPerfil(Usuario, DocumentId));
     }
 }

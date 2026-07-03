@@ -203,6 +203,16 @@
                     Clicked="btnPantalla_Clicked">                    
                 </Button>
 
+                <Button
+                    x:Name="btnEscanearQR"
+                    Text="ESCANEAR QR"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="45"
+                    Clicked="btnEscanearQR_Clicked">                    
+                </Button>
+
             </VerticalStackLayout>
             
             <Image

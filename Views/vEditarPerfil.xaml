@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ParkIsrael_Octavo.Views.vEditarUsuario"
-             Title="vEditarUsuario">
+             x:Class="ParkIsrael_Octavo.Views.vEditarPerfil"
+             Title="vEditarPerfil">
 
     <ScrollView>
         <VerticalStackLayout
             Spacing="15"
             Padding="15">
-
+            
             <Image
                 Source="logo.png"
                 MaximumHeightRequest="250"
@@ -47,7 +47,7 @@
                 BorderColor="#4B2EDB"
                 BorderWidth="2"
                 TextColor="#4B2EDB"
-                Clicked="btnCambImg_Clicked">
+                Clicked="btnCambImg_Clicked">                
             </Button>
 
             <!-- FORMULARIO -->
@@ -61,7 +61,7 @@
                 <Grid
                     RowSpacing="10"
                     ColumnSpacing="10">
-                    
+
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -72,56 +72,46 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <!-- ID SOLO LECTURA -->
                     <Label Grid.Row="0" Grid.Column="0" Text="ID:" FontAttributes="Bold"/>
-                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Id}" IsReadOnly="True" TextColor="DarkGrey"/>
+                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Id}" IsReadOnly="True" TextColor="Gray"/>
 
-                    <!-- ACTIVO -->
-                    <Label Grid.Row="0" Grid.Column="2" Text="Activo:" FontAttributes="Bold"/>
-                    <Picker Grid.Row="0" Grid.Column="3" x:Name="pkActivo" SelectedItem="{Binding Activo}">
-                        <Picker.Items>
-                            <x:String>Si</x:String>
-                            <x:String>No</x:String>
-                        </Picker.Items>
-                    </Picker>
+                    <!-- STATUS -->
+                    <Label Grid.Row="0" Grid.Column="2" Text="Status:" FontAttributes="Bold"/>
+                    <Entry Grid.Row="0" Grid.Column="3" Text="{Binding Status}" IsReadOnly="True" TextColor="Gray"/>
 
                     <!-- APELLIDOS -->
                     <Label Grid.Row="1" Grid.Column="0" Text="Apellidos:" FontAttributes="Bold"/>
-                    <Entry Grid.Row="1" Grid.Column="1" x:Name="txtApellidos" Text="{Binding Apellidos}" Placeholder="Apellido"/>
+                    <Entry Grid.Row="1" Grid.Column="1" x:Name="txtApellidos" Text="{Binding Apellidos}" Placeholder="Apellidos" />
 
                     <!-- NOMBRES -->
                     <Label Grid.Row="1" Grid.Column="2" Text="Nombres:" FontAttributes="Bold"/>
-                    <Entry Grid.Row="1" Grid.Column="3" x:Name="txtNombres" Text="{Binding Nombres}" Placeholder="Nombre"/>
+                    <Entry Grid.Row="1" Grid.Column="3" x:Name="txtNombres" Text="{Binding Nombres}" Placeholder="Nombres" />
 
-                    <!-- CEDULA -->
+                    <!-- CÉDULA -->
                     <Label Grid.Row="2" Grid.Column="0" Text="Cédula:" FontAttributes="Bold"/>
-                    <Entry Grid.Row="2" Grid.Column="1" x:Name="txtCedula" Text="{Binding Cedula}" Placeholder="0000000000"/>
+                    <Entry Grid.Row="2" Grid.Column="1" x:Name="txtCedula" Text="{Binding Cedula}" Keyboard="Numeric" MaxLength="10" Placeholder="0000000000" />
 
-                    <!-- STATUS -->
-                    <Label Grid.Row="2" Grid.Column="2" Text="Status:" FontAttributes="Bold"/>
-                    <Picker Grid.Row="2" Grid.Column="3" x:Name="pkStatus" SelectedItem="{Binding Status}">
-                        <Picker.Items>
-                            <x:String>administrador</x:String>
-                            <x:String>estudiante</x:String>
-                        </Picker.Items>
-                    </Picker>
+                    <!-- ACTIVO -->
+                    <Label Grid.Row="2" Grid.Column="2" Text="Activo:" FontAttributes="Bold"/> 
+                    <Entry Grid.Row="2" Grid.Column="3" Text="{Binding Activo}" IsReadOnly="True" TextColor="Gray"/>
 
                     <!-- CORREO -->
                     <Label Grid.Row="3" Grid.Column="0" Text="Correo:" FontAttributes="Bold"/>
-                    <Entry Grid.Row="3" Grid.Column="1" x:Name="txtCorreo" Text="{Binding Correo}" Placeholder="email@ejemplo.com" Keyboard="Email"/>
+                    <Entry Grid.Row="3" Grid.Column="1" x:Name="txtCorreo" Text="{Binding Correo}" Keyboard="Email" Placeholder="correo@ejemplo.com" />
 
-                    <!-- TELEFONO -->
+                    <!-- TELÉFONO -->
                     <Label Grid.Row="3" Grid.Column="2" Text="Teléfono:" FontAttributes="Bold"/>
-                    <Entry Grid.Row="3" Grid.Column="3" x:Name="txtTelefono" Text="{Binding Telefono}" Placeholder="0999999999" Keyboard="Telephone"/>
+                    <Entry Grid.Row="3" Grid.Column="3" x:Name="txtTelefono" Text="{Binding Telefono}" Keyboard="Telephone" Placeholder="0999999999" />
 
-                    <!-- TIPO DE VEHICULO -->
-                    <Label Grid.Row="4" Grid.Column="0" Text="Tipo Vehiculo:" FontAttributes="Bold"/>
+                    <!-- VEHÍCULO -->
+                    <Label Grid.Row="4" Grid.Column="0" Text="Vehículo:" FontAttributes="Bold"/>
                     <Picker Grid.Row="4" Grid.Column="1" x:Name="pkTipoVehiculo" SelectedItem="{Binding TipoVehiculo}">
                         <Picker.Items>
                             <x:String>Auto</x:String>
@@ -131,44 +121,36 @@
 
                     <!-- PLACA -->
                     <Label Grid.Row="4" Grid.Column="2" Text="Placa:" FontAttributes="Bold"/>
-                    <Entry Grid.Row="4" Grid.Column="3" x:Name="txtPlaca" Text="{Binding PlacaVehicular}" Placeholder="ABC-1234"/>
+                    <Entry Grid.Row="4" Grid.Column="3" x:Name="txtPlaca" Text="{Binding PlacaVehicular}" Placeholder="ABC1234" />
 
                     <!-- USUARIO -->
                     <Label Grid.Row="5" Grid.Column="0" Text="Usuario:" FontAttributes="Bold"/>
-                    <Entry Grid.Row="5" Grid.Column="1" x:Name="txtUsuario" Text="{Binding Usuario}" Placeholder="Usuario"/>
+                    <Entry Grid.Row="5" Grid.Column="1" x:Name="txtUsuario" Text="{Binding Usuario}" Placeholder="Usuario" />
 
                     <!-- CONTRASEÑA -->
                     <Label Grid.Row="5" Grid.Column="2" Text="Contraseña:" FontAttributes="Bold"/>
-                    <Entry Grid.Row="5" Grid.Column="3" x:Name="txtContrasena" Text="{Binding Contrasena}" Placeholder="**********"/>
+                    <Entry Grid.Row="5" Grid.Column="3" x:Name="txtContrasena" Text="{Binding Contrasena}" Placeholder="********" />
 
                 </Grid>
+
             </Frame>
 
-            <!-- BOTÓN ACTUALIZAR -->
+            <!-- ACTUALIZAR -->
             <Button
                 x:Name="btnActualizar"
-                Text="ACTUALIZAR"
+                Text="ACTUALIZAR MIS DATOS"
                 FontSize="20"
-                FontAttributes="Bold"
+                BackgroundColor="DarkOrange"
+                TextColor="White"
                 CornerRadius="10"
-                HeightRequest="45"
-                Clicked="btnActualizar_Clicked">
-            </Button>
-
-            <!-- BOTÓN ELIMINAR -->
-            <Button
-                x:Name="btnEliminar"
-                Text="ELIMINAR"
-                FontSize="20"
                 FontAttributes="Bold"
-                CornerRadius="10"
                 HeightRequest="45"
-                Clicked="btnEliminar_Clicked">
+                Clicked="btnActualizar_Clicked">                
             </Button>
 
             <Image
                 Source="uisrael.jpg"
-                MaximumHeightRequest="55">
+                MaximumHeightRequest="55">                
             </Image>
 
         </VerticalStackLayout>
